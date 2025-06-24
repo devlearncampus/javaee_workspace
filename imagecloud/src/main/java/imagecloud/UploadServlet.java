@@ -2,6 +2,7 @@ package imagecloud;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -64,7 +65,10 @@ public class UploadServlet extends HttpServlet{
 				//파라미터 명을 이용하면, 업로드된 파일명도 추출가능 
 				String filename=multi.getOriginalFileName(param);
 				out.print("업로드된 파일명은 "+filename); //클라이언트가 브라우저 일때
+
+				filename=URLDecoder.decode(filename, "UTF-8");
 				System.out.print("업로드된 파일명은 "+filename);//클라이언트가 브라우저가 아닐때
+				
 			}
 			
 			
