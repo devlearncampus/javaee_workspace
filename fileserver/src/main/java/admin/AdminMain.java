@@ -107,7 +107,6 @@ public class AdminMain extends JFrame{
 				response.close();
 				httpClient.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
