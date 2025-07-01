@@ -2,9 +2,14 @@
 <%@page import="java.util.List"%>
 <%@page import="com.sinse.boardapp.repository.NoticeDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%!
+	//list.jsp가 톰켓에 의해, 서블릿으로 작성될때 멤버 영역 (선언부)
+	NoticeDAO noticeDAO;
+	int id =;
+%>
 <%
 	//요청을 받는 service() 메서드 영역
-	NoticeDAO noticeDAO=new NoticeDAO();
+	noticeDAO=new NoticeDAO();
 	List<Notice> list=noticeDAO.selectAll();
 %>
 <!DOCTYPE html>
@@ -30,7 +35,13 @@ tr:nth-child(even) {
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+<script type="text/javascript">
+	$(()=>{
+		$("button").click(()=>{
+			location.href="/notice/write.jsp";
+		});
+	});
+</script>
 </head>
 <body>
 
@@ -50,12 +61,15 @@ tr:nth-child(even) {
   <% Notice notice=list.get(i);%>
   <tr>
     <td>Jill</td>
-    <td><%=notice.getTitle() %></td>
+    <td><a href="/notice/content.jsp?notice_id=<%=id = notice.getNotice_id()%>"><%=notice.getTitle() %></a></td>
     <td><%=notice.getWriter() %></td>
     <td><%=notice.getRegdate() %></td>
     <td><%=notice.getHit() %></td>
   </tr>
 	<%} %>
+	<tr>
+		<td colspan="5"><button>글등록</button></td>		
+	</tr>
 </table>
 
 </body>

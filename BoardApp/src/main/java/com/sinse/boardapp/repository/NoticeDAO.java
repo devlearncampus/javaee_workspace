@@ -10,13 +10,12 @@ import java.util.List;
 
 import com.sinse.boardapp.exception.NoticeException;
 import com.sinse.boardapp.model.Notice;
+import com.sinse.boardapp.pool.PoolManager;
 
 //CRUD
 public class NoticeDAO {
-	String driver="com.mysql.cj.jdbc.Driver";
-	String url="jdbc:mysql://localhost:3306/spring4";
-	String user="spring4";
-	String pass="1234";
+
+	PoolManager poolManager=PoolManager.getInstance();
 	
 	//모든 레코드 
 	public List selectAll() {
@@ -26,8 +25,7 @@ public class NoticeDAO {
 		List list = new ArrayList();
 		
 		try {
-			Class.forName(driver);
-			con=DriverManager.getConnection(url, user, pass); //접속시도
+			con=poolManager.getConnection(); //대여
 			StringBuffer sql=new StringBuffer();
 			sql.append("select * from notice order by notice_id desc");
 			
@@ -44,38 +42,19 @@ public class NoticeDAO {
 				
 				list.add(notice);
 			}			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			if(rs!=null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(pstmt!=null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(con!=null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}			
+			poolManager.release(con, pstmt, rs);			
 		}				
 		return list;
 	}
 	
 	//한건 가져오기 
 	public Notice select() {
+		Connection con=null;
+		
+		
 		return null;
 	}
 	
@@ -84,9 +63,8 @@ public class NoticeDAO {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		
-		try {
-			Class.forName(driver);
-			con=DriverManager.getConnection(url, user, pass); //접속시도
+		try {			
+			con=poolManager.getConnection();
 			StringBuffer sql=new StringBuffer();
 			sql.append("insert into notice(title, writer, content) values(?,?,?)");
 			pstmt=con.prepareStatement(sql.toString());
@@ -99,25 +77,10 @@ public class NoticeDAO {
 			if(result<1) {
 				throw new NoticeException("글 등록 실패");
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			if(pstmt!=null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(con!=null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			poolManager.release(con, pstmt);
 			
 		}
 		
