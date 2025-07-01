@@ -70,8 +70,7 @@ public class NoticeDAO {
 					e.printStackTrace();
 				}
 			}			
-		}		
-		
+		}				
 		return list;
 	}
 	

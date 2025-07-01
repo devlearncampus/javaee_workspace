@@ -1,7 +1,11 @@
+<%@page import="com.sinse.boardapp.model.Notice"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sinse.boardapp.repository.NoticeDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	//요청을 받는 service() 메서드 영역
-	
+	NoticeDAO noticeDAO=new NoticeDAO();
+	List<Notice> list=noticeDAO.selectAll();
 %>
 <!DOCTYPE html>
 <html>
@@ -35,25 +39,23 @@ tr:nth-child(even) {
 
 <table>
   <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Points</th>
+    <th>No</th>
+    <th>제목</th>
+    <th>작성자</th>
+    <th>등록일</th>
+    <th>조회</th>
   </tr>
+  
+  <%for(int i=0;i<list.size();i++){ %>
+  <% Notice notice=list.get(i);%>
   <tr>
     <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
+    <td><%=notice.getTitle() %></td>
+    <td><%=notice.getWriter() %></td>
+    <td><%=notice.getRegdate() %></td>
+    <td><%=notice.getHit() %></td>
   </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>Adam</td>
-    <td>Johnson</td>
-    <td>67</td>
-  </tr>
+	<%} %>
 </table>
 
 </body>
