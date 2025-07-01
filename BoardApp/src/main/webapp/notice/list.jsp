@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%
+	//요청을 받는 service() 메서드 영역
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
