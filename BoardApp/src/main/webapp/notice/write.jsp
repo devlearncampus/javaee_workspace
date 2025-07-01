@@ -56,8 +56,11 @@ input[type=button]:hover {
 		//버튼에 이벤트 연결 
 		$("input[type='button']").click(()=>{
 			$("form").attr({
-				action:"요청을받을주소",
-				method:"GET",  //머리에 데이터를 실어 나르게 됨, 따라서 편지봉투에 나르는 겪, 문제1)노출 문제2)내용짤린다
+				action:"/notice/regist",
+				
+				//머리에 데이터를 실어 나르게 됨, 따라서 편지봉투에 나르는 겪, 문제1)노출 문제2)내용짤린다
+				//body인 post로 보내자
+				method:"POST",  
 			});
 			$("form").submit(); //전송
 		});
@@ -72,13 +75,13 @@ input[type=button]:hover {
 <div class="container">
   <form>
     <label for="fname">Title</label>
-    <input type="text" id="fname" name="firstname" placeholder="제목입력..">
+    <input type="text" id="fname" name="title" placeholder="제목입력..">
 
     <label for="lname">Writer</label>
-    <input type="text" id="lname" name="lastname" placeholder="작성자 입력..">
+    <input type="text" id="lname" name="writer" placeholder="작성자 입력..">
 
     <label for="subject">Content</label>
-    <textarea id="content" name="subject" placeholder="내용입력" style="height:200px"></textarea>
+    <textarea id="content" name="content" placeholder="내용입력" style="height:200px"></textarea>
 
     <input type="button" value="Submit">
   </form>
