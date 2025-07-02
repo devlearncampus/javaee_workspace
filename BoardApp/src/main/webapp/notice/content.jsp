@@ -93,7 +93,7 @@ input[type=button]:hover {
 		
 		//2번째-목록
 		$("#bt_list").click(()=>{
-			
+			location.href="/notice/list.jsp";
 		});
 		
 	});
