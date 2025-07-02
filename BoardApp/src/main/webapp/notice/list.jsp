@@ -5,7 +5,6 @@
 <%!
 	//list.jsp가 톰켓에 의해, 서블릿으로 작성될때 멤버 영역 (선언부)
 	NoticeDAO noticeDAO;
-	int id =;
 %>
 <%
 	//요청을 받는 service() 메서드 영역
@@ -61,7 +60,7 @@ tr:nth-child(even) {
   <% Notice notice=list.get(i);%>
   <tr>
     <td>Jill</td>
-    <td><a href="/notice/content.jsp?notice_id=<%=id = notice.getNotice_id()%>"><%=notice.getTitle() %></a></td>
+    <td><a href="/notice/content.jsp?notice_id=<%=notice.getNotice_id()%>"><%=notice.getTitle() %></a></td>
     <td><%=notice.getWriter() %></td>
     <td><%=notice.getRegdate() %></td>
     <td><%=notice.getHit() %></td>

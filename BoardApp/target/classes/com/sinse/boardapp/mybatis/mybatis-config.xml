@@ -6,7 +6,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" 	value="com.mysql.cj.jdbc.Driver" />
-				<property name="url" 		value="jdbc:mysql://localhost:3306/spring4" />
+				<property name="url" 		value="jdbc:mysql://192.168.60.20:3306/spring4" />
 				<property name="username" value="spring4" />
 				<property name="password" value="1234" />
 			</dataSource>
