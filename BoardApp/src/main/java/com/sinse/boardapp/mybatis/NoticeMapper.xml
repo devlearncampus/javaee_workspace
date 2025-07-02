@@ -22,6 +22,20 @@
 		from notice where notice_id=#{notice_id}
 	</select>
 	
+	<!-- 한건 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from notice where notice_id=#{notice_id}
+	</delete>
+	
+	<!-- 한건 수정 
+		SQL  Mapper : SQL문과 Java객체와의 매핑을 자동으로 지원하는 프레임웍, Mybatis
+		ORM(Object-Relation-Mapping) : Java객체와 데이터베이스를 자동으로 매핑  Hibernate, JPA  
+	-->
+	<update id="update" parameterType="com.sinse.boardapp.model.Notice">
+		update notice set title=#{title}, writer=#{writer}, content=#{content} 
+		where notice_id=#{notice_id}
+	</update>
+	
 	
 </mapper>
 

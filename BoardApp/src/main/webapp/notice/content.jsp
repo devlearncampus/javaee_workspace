@@ -73,7 +73,14 @@ input[type=button]:hover {
 		//버튼에 이벤트 연결 
 		//0번째-수정
 		$("#bt_edit").click(()=>{
-			
+			if(confirm("수정하시겠어요?")){
+				//서버로 입력폼의 내용을 모두 가져가야 하므로, Post 방식으로 보내야 함 
+				$("form").attr({
+					method:"POST", 
+					action:"/notice/update"
+				});
+				$("form").submit();
+			}
 		});
 		
 		//1번째-삭제
@@ -97,6 +104,11 @@ input[type=button]:hover {
 
 <div class="container">
   <form>
+  <!-- hidden 은 html 컴포넌트의 역할을 수행하지만, 시각적으로 표현되지는 않음
+  	노출되지 않은 상태로 데이터를 전송할때 사용
+   -->
+    <input type="hidden" name="notice_id" value="<%=notice.getNotice_id()%>">
+    
     <label for="fname">Title</label>
     <input type="text" id="fname" name="title" value="<%=notice.getTitle()%>">
 

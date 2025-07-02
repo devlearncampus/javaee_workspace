@@ -1,9 +1,5 @@
 package com.sinse.boardapp.repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -45,10 +41,27 @@ public class NoticeDAO {
 	}
 	
 	//수정 
-	public void update() {
+	public void update(Notice notice) throws NoticeException {
+		SqlSession sqlSession=config.getSqlSession();
+		int result = sqlSession.update("com.sinse.boardapp.model.Notice.update", notice);
+		sqlSession.commit();
+		sqlSession.close();
+		
+		if(result<1) {
+			throw new NoticeException("수정실패");
+		}
 	}
+	
 	//삭제 
-	public void delete() {
+	public void delete(int notice_id) throws NoticeException {
+		SqlSession sqlSession=config.getSqlSession();
+		int result=sqlSession.delete("com.sinse.boardapp.model.Notice.delete", notice_id);
+		sqlSession.commit(); //DML 트랜잭션 확정!!
+		sqlSession.close();
+		
+		if(result <1) {
+			throw new NoticeException("삭제 실패");
+		}
 	}
 }
 
