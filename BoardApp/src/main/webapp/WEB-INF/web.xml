@@ -13,4 +13,14 @@
 		<url-pattern>/notice/regist</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>deleteServlet</servlet-name>
+		<servlet-class>com.sinse.boardapp.controller.DeleteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleteServlet</servlet-name>
+		<url-pattern>/notice/del</url-pattern>
+	</servlet-mapping>
+	
+	
 </web-app>

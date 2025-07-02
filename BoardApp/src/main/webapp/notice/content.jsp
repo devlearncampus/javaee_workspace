@@ -1,6 +1,7 @@
 <%@page import="com.sinse.boardapp.model.Notice"%>
 <%@page import="com.sinse.boardapp.repository.NoticeDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+
 <%! NoticeDAO noticeDAO=new NoticeDAO(); %>
 <%
 	//요청 객체로부터 파라미터 뽑아내기
@@ -70,15 +71,22 @@ input[type=button]:hover {
 		$("#content").summernote('code', "<%=notice.getContent()%>");
 		
 		//버튼에 이벤트 연결 
-		$("input[type='button']").click(()=>{
-			$("form").attr({
-				action:"/notice/regist",
-				
-				//머리에 데이터를 실어 나르게 됨, 따라서 편지봉투에 나르는 겪, 문제1)노출 문제2)내용짤린다
-				//body인 post로 보내자
-				method:"POST",  
-			});
-			$("form").submit(); //전송
+		//0번째-수정
+		$("#bt_edit").click(()=>{
+			
+		});
+		
+		//1번째-삭제
+		$("#bt_del").click(()=>{
+			if(confirm("삭제하시겠어요?")){
+				//Get방식 요청(링크)
+				location.href="/notice/del?notice_id=<%=notice_id%>";
+			}
+		});
+		
+		//2번째-목록
+		$("#bt_list").click(()=>{
+			
 		});
 		
 	});
@@ -98,7 +106,10 @@ input[type=button]:hover {
     <label for="subject">Content</label>
     <textarea id="content" name="content" placeholder="내용입력" style="height:200px"></textarea>
 
-    <input type="button" value="Submit">
+    <input type="button" value="수정" id="bt_edit">
+    <input type="button" value="삭제" id="bt_del">
+    <input type="button" value="목록" id="bt_list">
+    
   </form>
 </div>
 
