@@ -26,8 +26,11 @@ public class NoticeDAO {
 	}
 	
 	//한건 가져오기 
-	public Notice select() {
-		return null;
+	public Notice select(int notice_id) {
+		SqlSession sqlSession = config.getSqlSession();
+		Notice notice=sqlSession.selectOne("com.sinse.boardapp.model.Notice.select", notice_id);
+		sqlSession.close();
+		return notice;
 	}
 	
 	//한건 넣기 

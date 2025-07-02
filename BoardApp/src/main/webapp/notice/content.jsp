@@ -1,4 +1,7 @@
+<%@page import="com.sinse.boardapp.model.Notice"%>
+<%@page import="com.sinse.boardapp.repository.NoticeDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%! NoticeDAO noticeDAO=new NoticeDAO(); %>
 <%
 	//요청 객체로부터 파라미터 뽑아내기
 	//이 스크립틀릿 영역은 이 jsp가 서블릿으로 변경되어질때, service() 메서드 영역이므로, 이미 service()메서드
@@ -6,10 +9,11 @@
 	//service(HttpServletRequest request, HttpServletResponse response)
 	String notice_id=request.getParameter("notice_id");
 	
-	String sql="select * from notice where notice_id="+notice_id;
-	out.print(sql);
+	//String sql="select * from notice where notice_id="+notice_id;
+	//out.print(sql);	
+	Notice notice=noticeDAO.select(Integer.parseInt(notice_id));
 %>
-<% %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,8 +65,9 @@ input[type=button]:hover {
 <script type="text/javascript">
 	$(()=>{		
 		$("#content").summernote({
-			height:250
+			height:250,
 		});	//서머노트 연동 
+		$("#content").summernote('code', "<%=notice.getContent()%>");
 		
 		//버튼에 이벤트 연결 
 		$("input[type='button']").click(()=>{
@@ -85,10 +90,10 @@ input[type=button]:hover {
 <div class="container">
   <form>
     <label for="fname">Title</label>
-    <input type="text" id="fname" name="title" placeholder="제목입력..">
+    <input type="text" id="fname" name="title" value="<%=notice.getTitle()%>">
 
     <label for="lname">Writer</label>
-    <input type="text" id="lname" name="writer" placeholder="작성자 입력..">
+    <input type="text" id="lname" name="writer" value="<%=notice.getWriter()%>">
 
     <label for="subject">Content</label>
     <textarea id="content" name="content" placeholder="내용입력" style="height:200px"></textarea>

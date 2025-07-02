@@ -14,7 +14,22 @@
 		insert into notice(title, writer, content) values(#{title},#{writer},#{content})
 	</insert>	
 	
+	<!-- 글한건 가져오기 
+	Mybatis 가 스스로 Notice 모델에 담는다..따라서 담은 결과는 resultType으로 반환해야 한다..
+	-->
+	<select id="select" parameterType="int" resultType="com.sinse.boardapp.model.Notice">
+		select notice_id,title,writer,content,regdate,hit 
+		from notice where notice_id=#{notice_id}
+	</select>
+	
+	
 </mapper>
+
+
+
+
+
+
 
 
 
