@@ -12,6 +12,11 @@
 		insert into news(title, writer, content) values(#{title}, #{writer}, #{content})
 	</insert>
 	
+	<!-- 게시물 한건 가져오기 -->
+	<select id="select" parameterType="int" resultType="News">
+		select * from news where news_id=#{news_id}
+	</select>
+	
 </mapper>
 
 

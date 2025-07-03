@@ -23,7 +23,10 @@ public class NewsDAO {
 	
 	//한건 가져오기 
 	public News select(int news_id) {
-		return null;
+		SqlSession sqlSession = config.getSqlSession();
+		News news=sqlSession.selectOne("News.select", news_id);
+		sqlSession.close();
+		return news;
 	}
 	
 	//한건 넣기
