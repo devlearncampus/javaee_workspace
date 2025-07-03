@@ -113,6 +113,7 @@ tr:nth-child(even) {
   		<form id="comment_form">
 	  		<input type="text" style="width:73%" name="msg">
 	  		<input type="text" style="width:20%" name="user">
+	  		<input type="hidden" name="news_id" value="<%=news.getNews_id()%>">
 	  		<input type="button" value="등록" id="bt_comment_regist">
   		</form>
   	</div>
