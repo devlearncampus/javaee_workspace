@@ -41,6 +41,14 @@ a{text-decoration: none}
 	color:red;
 }
 </style>
+<%@ include file="/inc/head_link.jsp"%>
+<script type="text/javascript">
+	$(()=>{
+		$("button").click(()=>{
+			location.href="/news/write.jsp";
+		});
+	});
+</script>
 </head>
 <body>
 	<table>

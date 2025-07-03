@@ -31,5 +31,14 @@
 		<url-pattern>/notice/update</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>newsRegistServlet</servlet-name>
+		<servlet-class>com.sinse.boardapp.news.controller.RegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>newsRegistServlet</servlet-name>
+		<url-pattern>/news/regist</url-pattern>
+	</servlet-mapping>
+	
 	
 </web-app>

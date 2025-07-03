@@ -2,6 +2,12 @@
 <!DOCTYPE mapper SYSTEM "mybatis-3-mapper.dtd">
 <mapper namespace="News">
 	
+	
+	<!-- 한건 등록 -->
+	<insert id="insert" parameterType="News">
+		insert into news(title, writer, content) values(#{title}, #{writer}, #{content})
+	</insert>
+	
 </mapper>
 
 

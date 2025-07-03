@@ -48,7 +48,10 @@ input[type=button]:hover {
 		//버튼에 이벤트 연결 
 		$("input[type='button']").click(()=>{
 			$("form").attr({
-				action:"/notice/regist",
+				action:"/news/regist",
+				
+				//머리에 데이터를 실어 나르게 됨, 따라서 편지봉투에 나르는 겪, 문제1)노출 문제2)내용짤린다
+				//body인 post로 보내자
 				method:"POST",  
 			});
 			$("form").submit(); //전송
