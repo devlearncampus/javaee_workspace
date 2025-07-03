@@ -12,9 +12,19 @@ public class CommentDAO {
 	
 	MybatisConfig config=MybatisConfig.getInstance();
 	
+	//모든 댓글 가져오기
 	public List selctAll() {
 		return null;
 	}
+	
+	//해당 뉴스기사에 소속된 댓글만 가져오기 
+	public List selectByNewsId(int news_id) {
+		SqlSession sqlSession=config.getSqlSession();
+		List list=sqlSession.selectList("Comment.selectByNewsId", news_id);
+		sqlSession.close();
+		return list;
+	}
+	
 	public Comment select(int comment_id) {
 		return null;
 	}

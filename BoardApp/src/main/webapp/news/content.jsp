@@ -1,14 +1,19 @@
+<%@page import="com.sinse.boardapp.model.Comment"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sinse.boardapp.repository.CommentDAO"%>
 <%@page import="com.sinse.boardapp.model.News"%>
 <%@page import="com.sinse.boardapp.repository.NewsDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%!
 	NewsDAO newsDAO = new NewsDAO();
+	CommentDAO commentDAO=new CommentDAO();
 %>
 <%
 	//내장 객체 
 	String news_id=request.getParameter("news_id");
 	out.print("넘겨받은 파라미터는 "+news_id);
 	News news=newsDAO.select(Integer.parseInt(news_id));
+	List<Comment> commentList=commentDAO.selectByNewsId(Integer.parseInt(news_id));
 %>
 <!DOCTYPE html>
 <html>
@@ -126,12 +131,13 @@ tr:nth-child(even) {
   				<th>등록일</th>
   			</tr>
   			
+  			<% for(Comment comment : commentList){%>
   			<tr>
-  				<th>ddddddd</th>
-  				<th>ddd</th>
-  				<th>dddd</th>
+  				<th><%=comment.getMsg() %></th>
+  				<th><%=comment.getUser() %></th>
+  				<th><%=comment.getMsgdate()%></th>
   			</tr>
-  			
+  			<%} %>
   		</table>
   	</div>
 </div>
