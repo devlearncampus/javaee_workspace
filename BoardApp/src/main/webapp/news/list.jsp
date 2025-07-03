@@ -65,10 +65,10 @@ a{text-decoration: none}
 		%>
 		<%for(int i=1;i<=paging.getPageSize();i++){ %>
 		<%if(num<1)break; %>
-		<%News news=newsList.get(curPos++); %>
+		<%News news=newsList.get(curPos++);%>
 		<tr>
 			<td><%=num--%></td>
-			<td><a href="/news/content.jsp?news_id=<%=news.getNews_id()%>"><%=news.getTitle() %></a></td>
+			<td><a href="/news/content.jsp?news_id=<%=news.getNews_id()%>"><%=news.getTitle() %></a> [<%=news.getCommentList().size() %>]</td>
 			<td><%=news.getWriter() %></td>
 			<td><%=news.getRegdate() %></td>
 			<td><%=news.getHit() %></td>

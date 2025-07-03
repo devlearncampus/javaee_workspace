@@ -78,7 +78,8 @@ tr:nth-child(even) {
 		$("#content").summernote("code", "<%=news.getContent()%>");
 		
 		//버튼에 이벤트 연결 
-		$("#bt_news_edit").click(()=>{
+		$("#bt_news_list").click(()=>{
+			location.href="/news/list.jsp";
 		});
 		
 		//댓글에 이벤트 연결 

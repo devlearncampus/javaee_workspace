@@ -13,6 +13,7 @@
 		select * from comment where news_id=#{news_id}
 	</select>
 	
+
 </mapper>
 
 
