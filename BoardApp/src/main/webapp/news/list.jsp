@@ -1,18 +1,18 @@
+<%@page import="com.sinse.boardapp.util.Paging"%>
+<%@page import="com.sinse.boardapp.model.News"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sinse.boardapp.repository.NewsDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%
-	int totalRecord=26;	
-	int pageSize=10; //페이지당 보여질 레코드 수
-	int totalPage=(int)Math.ceil((float)totalRecord/pageSize) ; //총 페이지 수 
-	int blockSize=10; //블럭당 보여질 페이지 수 
-	int currentPage=1; //현재 보고있는 페이지 	
-	if(request.getParameter("currentPage")!=null){//페이지가 넘어올때만...
-		currentPage= Integer.parseInt(request.getParameter("currentPage"));
-	}
-	int firstPage=currentPage - (currentPage-1)%blockSize; //블럭당 시작 페이지 
-	int lastPage=firstPage+(blockSize-1); //블럭당 끝 페이지
-	int num=totalRecord-((currentPage-1)*pageSize); //페이지당 시작 번호 
+<%! 
+	NewsDAO newsDAO = new NewsDAO(); 
+	Paging paging=new Paging();
 %>
-<%="currentPage="+currentPage%>
+<%
+	List<News> newsList=newsDAO.selectAll();
+	//페이징 객체에게 계산을 맡긴다
+	paging.init(newsList, request);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +41,7 @@ a{text-decoration: none}
 	color:red;
 }
 </style>
-<%@ include file="/inc/head_link.jsp"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(()=>{
 		$("button").click(()=>{
@@ -59,22 +59,27 @@ a{text-decoration: none}
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
-		<%for(int i=1;i<=pageSize;i++){ %>
+		<%
+			int curPos=paging.getCurPos();
+			int num=paging.getNum();
+		%>
+		<%for(int i=1;i<=paging.getPageSize();i++){ %>
 		<%if(num<1)break; %>
+		<%News news=newsList.get(curPos++); %>
 		<tr>
 			<td><%=num--%></td>
-			<td>Smith</td>
-			<td>50</td>
-			<td>50</td>
-			<td>50</td>
+			<td><a href="/news/content.jsp?news_id=<%=news.getNews_id()%>"><%=news.getTitle() %></a></td>
+			<td><%=news.getWriter() %></td>
+			<td><%=news.getRegdate() %></td>
+			<td><%=news.getHit() %></td>
 		</tr>
 		<%}%>
 		<tr>
 			<td colspan="5">
 				◀
-				<%for(int i=firstPage;i<=lastPage;i++){%>
-				<%if(i>totalPage)break; //총 페이지수를 넘어서면 그만두기%>
-				<a  <%if(currentPage==i){%>class="pageNum"<%}%>  href="/news/list.jsp?currentPage=<%=i%>">[ <%=i%> ]</a>
+				<%for(int i=paging.getFirstPage();i<=paging.getLastPage();i++){%>
+				<%if(i>paging.getTotalPage())break; //총 페이지수를 넘어서면 그만두기%>
+				<a  <%if(paging.getCurrentPage()==i){%>class="pageNum"<%}%>  href="/news/list.jsp?currentPage=<%=i%>">[ <%=i%> ]</a>
 				<%} %>
 				▶
 			</td>

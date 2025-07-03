@@ -15,7 +15,10 @@ public class NewsDAO {
 	
 	//모든 레코드 가져오기
 	public List selectAll(){
-		return null;
+		SqlSession sqlSession=config.getSqlSession();
+		List list=sqlSession.selectList("News.selectAll");
+		sqlSession.close();
+		return list;
 	};
 	
 	//한건 가져오기 
@@ -31,6 +34,7 @@ public class NewsDAO {
 			throw new NewsException("등록 실패");
 		}
 		sqlSession.commit();
+		sqlSession.close();
 	}
 	
 	//한건 수정 

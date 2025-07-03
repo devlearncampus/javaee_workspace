@@ -2,6 +2,10 @@
 <!DOCTYPE mapper SYSTEM "mybatis-3-mapper.dtd">
 <mapper namespace="News">
 	
+	<!-- 모든 레코드 가져오기 -->
+	<select id="selectAll" resultType="News">
+		select * from news order by news_id desc
+	</select>
 	
 	<!-- 한건 등록 -->
 	<insert id="insert" parameterType="News">
