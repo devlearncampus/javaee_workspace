@@ -73,16 +73,18 @@ tr:nth-child(even) {
 		$("#content").summernote("code", "<%=news.getContent()%>");
 		
 		//버튼에 이벤트 연결 
-		$("input[type='button']").click(()=>{
-			$("form").attr({
-				action:"/news/regist",
-				
-				//머리에 데이터를 실어 나르게 됨, 따라서 편지봉투에 나르는 겪, 문제1)노출 문제2)내용짤린다
-				//body인 post로 보내자
-				method:"POST",  
-			});
-			$("form").submit(); //전송
+		$("#bt_news_edit").click(()=>{
 		});
+		
+		//댓글에 이벤트 연결 
+		$("#bt_comment_regist").click(()=>{
+			$("#comment_form").attr({
+				method:"post", //HTTP 프로토콜 통신에 사용되는 데이터 구성(Payload) body에 탑재됨..
+				action:"/comment/regist" 
+			});
+			$("#comment_form").submit();//전송
+		});
+	
 		
 	});
 </script>
@@ -102,13 +104,17 @@ tr:nth-child(even) {
     <label for="subject">Content</label>
     <textarea id="content" name="content" placeholder="내용입력" style="height:200px"></textarea>
 
-    <input type="button" value="Submit">
+    <input type="button" value="수정" id="bt_news_edit">
+    <input type="button" value="삭제" id="bt_news_del">
+    <input type="button" value="목록" id="bt_news_list">
   </form>
   
   	<div id="comment_header">
-  		<input type="text" style="width:73%">
-  		<input type="text" style="width:20%">
-  		<input type="button" value="등록">
+  		<form id="comment_form">
+	  		<input type="text" style="width:73%" name="msg">
+	  		<input type="text" style="width:20%" name="user">
+	  		<input type="button" value="등록" id="bt_comment_regist">
+  		</form>
   	</div>
   	
   	<div id="comment_content">

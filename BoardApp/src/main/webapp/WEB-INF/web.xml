@@ -40,5 +40,14 @@
 		<url-pattern>/news/regist</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>writeServlet</servlet-name>
+		<servlet-class>com.sinse.boardapp.comment.controller.WriteServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>writeServlet</servlet-name>
+		<url-pattern>/comment/regist</url-pattern>
+	</servlet-mapping>
+	
 	
 </web-app>
