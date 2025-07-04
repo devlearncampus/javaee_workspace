@@ -1,11 +1,12 @@
-<%@page import="com.sinse.memberapp.repository.DeptDAO"%>
+<%@page import="com.sinse.memberapp.model.Emp"%>
 <%@page import="com.sinse.memberapp.model.Dept"%>
+<%@page import="com.sinse.memberapp.repository.EmpDAO"%>
 <%@page import="java.util.List"%>
 
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%!
-	DeptDAO deptDAO = new DeptDAO();	
-	List<Dept> list=deptDAO.selectAll();
+	EmpDAO empDAO = new EmpDAO();	
+	List<Emp> list=empDAO.selectAll();
 %>
 <!DOCTYPE html>
 <html>
@@ -16,18 +17,33 @@
 <body>
 	<table width="100%">
 		<tr>
+			<th>empno</th>
+			<th>ename</th>
+			<th>job</th>
+			<th>mgr</th>
+			<th>hiredate</th>
+			<th>sal</th>
+			<th>comm</th>
 			<th>deptno</th>
 			<th>dname</th>
 			<th>loc</th>
-			<th>근무자수</th>
 		</tr>	
 		
-		<%for(Dept dept : list){%>
+		<%for(Emp emp : list){%>
+		<%
+			Dept dept=emp.getDept();
+		%>
 		<tr>
-			<td><%=dept.getDeptno() %></td>
-			<td><%=dept.getDname() %></td>
+			<td><%=emp.getEmpno() %></td>
+			<td><%=emp.getEname() %></td>
+			<td><%=emp.getJob()%></td>
+			<td><%=emp.getMgr()%></td>
+			<td><%=emp.getHiredate()%></td>
+			<td><%=emp.getSal()%></td>
+			<td><%=emp.getComm()%></td>
+			<td><%=dept.getDeptno()%></td>
+			<td><%=dept.getDname()%></td>
 			<td><%=dept.getLoc()%></td>
-			<td><%=dept.getEmpList().size()%></td>
 		</tr>	
 		<%} %>
 	</table>

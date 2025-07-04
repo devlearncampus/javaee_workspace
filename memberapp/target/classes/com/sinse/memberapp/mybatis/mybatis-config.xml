@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias type="com.sinse.memberapp.model.Dept" alias="Dept"/>
 		<typeAlias type="com.sinse.memberapp.model.Emp" alias="Emp"/>
+		<typeAlias type="com.sinse.memberapp.model.Member" alias="Member"/>
 	</typeAliases>
 	
   <environments default="development">
@@ -20,6 +21,7 @@
   <mappers>
     <mapper resource="com/sinse/memberapp/mybatis/DeptMapper.xml"/>
     <mapper resource="com/sinse/memberapp/mybatis/EmpMapper.xml"/>
+    <mapper resource="com/sinse/memberapp/mybatis/MemberMapper.xml"/>
   </mappers>
 
 </configuration>
