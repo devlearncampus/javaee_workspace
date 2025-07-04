@@ -3,6 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<typeAliases>
+		<typeAlias type="com.sinse.memberapp.model.Dept" alias="Dept"/>
+		<typeAlias type="com.sinse.memberapp.model.Emp" alias="Emp"/>
+	</typeAliases>
+	
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
@@ -11,9 +16,10 @@
       </dataSource>
     </environment>
   </environments>
-  <!--  
+
   <mappers>
-    <mapper resource="org/mybatis/example/BlogMapper.xml"/>
+    <mapper resource="com/sinse/memberapp/mybatis/DeptMapper.xml"/>
+    <mapper resource="com/sinse/memberapp/mybatis/EmpMapper.xml"/>
   </mappers>
-  -->
+
 </configuration>

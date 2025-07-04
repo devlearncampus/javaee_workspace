@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Emp">
+
+	<!-- 지정된 부서에 소속된 사원 -->
+	<select id="selectByDeptno" parameterType="int" resultType="Emp">
+		select * from emp where deptno=#{deptno}
+	</select>
+	
+</mapper>
