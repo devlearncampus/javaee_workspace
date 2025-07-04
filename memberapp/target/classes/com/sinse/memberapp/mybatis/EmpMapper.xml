@@ -2,9 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Emp">
 
+	<resultMap type="Emp" id="DeptEmpMap">
+		<id column="empno" 		property="empno"/>
+		<result column="ename" 	property="ename"/>
+		<result column="job" 		property="job"/>				
+		<result column="mgr" 		property="mgr"/>		
+		<result column="hiredate" property="hiredate"/>		
+		<result column="sal" 		property="sal"/>		
+		<result column="comm" 	property="comm"/>		
+		<association 
+			column="deptno"
+			property="dept" 
+			javaType="Dept"
+			select="Dept.select">
+		</association>
+	</resultMap>
+	
+	<!-- 모든 사원 정보 가져오기 -->
+	<select id="selectAll" resultMap="DeptEmpMap">
+		select empno,ename,job,mgr
+		hiredate,sal,comm,deptno from emp	
+	</select>
+	
+
 	<!-- 지정된 부서에 소속된 사원 -->
 	<select id="selectByDeptno" parameterType="int" resultType="Emp">
 		select * from emp where deptno=#{deptno}
 	</select>
+
 	
 </mapper>
