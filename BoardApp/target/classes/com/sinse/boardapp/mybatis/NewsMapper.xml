@@ -14,7 +14,7 @@
 		<result column="hit" 				property="hit"/>	
 		<collection column="news_id" javaType="java.util.List" 
 			ofType="Comment" property="commentList" 
-			select="Comment.selectByNewsId"/>
+			select="select * from comment where news_id=#{news_id}"/>
 	</resultMap>
 	
 	<!-- 모든 레코드 가져오기 -->
