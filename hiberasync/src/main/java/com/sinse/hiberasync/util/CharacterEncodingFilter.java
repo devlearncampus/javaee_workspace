@@ -24,9 +24,10 @@ public class CharacterEncodingFilter implements Filter{
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		request.setCharacterEncoding(encoding);		
-		//이 요청의 흐름을 그대로 흐르게처리.. ( 안해주면 요청은 여기서 막힘)
+		request.setCharacterEncoding(encoding);
+		response.setCharacterEncoding(encoding);
 		
+		//이 요청의 흐름을 그대로 흐르게처리.. ( 안해주면 요청은 여기서 막힘)
 		//chain.doFilter()를 기준으로 이전에 코드를 작성하면, 요청이 들어올때 하고싶은 작업을 처리...
 		chain.doFilter(request, response);//다음 필터 또는 다음 서블릿으로  요청 전달
 		//chain.doFilter()를 기준으로 다음에 코드를 작성하면, 응답시 하고싶은 작업을 처리...
