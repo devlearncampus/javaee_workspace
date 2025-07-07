@@ -7,7 +7,6 @@
 	#wrapper{
 		width:1200px;
 		height:800px;
-		background: yellow;
 		margin:auto;
 	}
 	#aside_regist{
@@ -18,7 +17,6 @@
 	#content{
 		width:800px;
 		height:100%;
-		background:pink;
 		float:left;
 	}	
 	
@@ -38,6 +36,22 @@
 		height:100%;
 		float:left;
 	}
+	
+	table {
+	  border-collapse: collapse;
+	  border-spacing: 0;
+	  width: 100%;
+	  border: 1px solid #ddd;
+	}
+	
+	th, td {
+	  text-align: left;
+	  padding: 16px;
+	}
+	
+	tr:nth-child(even) {
+	  background-color: #f2f2f2;
+	}	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -73,6 +87,42 @@
 		xhttp.send();//요청 시점이 발생하는 시점
 	}
 	
+	function printList(json){
+		let tag="<table width='90%'>";
+		tag+="<tr>";
+		tag+="<th>음식분류</th>";
+		tag+="<th>상호명</th>";
+		tag+="<th>연락처</th>";
+		
+		for(let i=0;i<json.length;i++){			
+			tag+="</tr>";
+			tag+="<tr>";
+			tag+="<td>"+json[i].foodType.title+"</td>";
+			tag+="<td>"+json[i].store_name+"</td>";
+			tag+="<td>"+json[i].tel+"</td>";
+			tag+="</tr>";
+		}
+		tag+="</table>";
+		
+		$("#list").html(tag);
+	}
+	
+	//비동기 방식의 상점 목록 요청 
+	function getStoreList(){
+		let xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "/store/list");
+		
+		xhttp.onload=function(){
+			let json=JSON.parse(this.responseText);
+			
+			//테이블 출력
+			console.log(json);
+			
+			printList(json);
+		}
+		
+		xhttp.send();	
+	}
 	
 	//비동기 방식의 post 요청 
 	function regist(){
@@ -86,7 +136,7 @@
 		xhttp.onload=function(){
 			if(this.status==201){ //status 서버의 응답 코드...200번대 긍정
 				//목록 가져와 출력 하기
-				alert("성공");
+				getStoreList();
 			}else{
 				let json=JSON.parse(this.responseText); //서버가 보내온 응답 문자열
 				alert(json.msg);
@@ -104,6 +154,7 @@
 	
 	$(()=>{
 		getFoodList();
+		getStoreList();
 		
 		$("#aside_regist button").click(()=>{
 			regist();

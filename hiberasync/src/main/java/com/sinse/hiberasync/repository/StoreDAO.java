@@ -1,5 +1,9 @@
 package com.sinse.hiberasync.repository;
 
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -24,7 +28,33 @@ public class StoreDAO {
 			throw new StoreException("등록실패", e);
 		}
 	}
+	
+	//모든 레코드 가져오기 
+	public List selectAll() throws StoreException{
+		Transaction tx=null;
+		List list=null;
+		
+		try(Session session = config.getSession()){
+			tx=session.beginTransaction();
+			TypedQuery query =session.createQuery("from Store", Store.class);
+			list=query.getResultList();			
+			tx.commit();
+		}catch(Exception e) {
+			if(tx!=null)tx.rollback();
+			throw new StoreException("목록 조회 실패", e);
+		}
+		return list;
+	}
+	
 }
+
+
+
+
+
+
+
+
 
 
 
