@@ -43,4 +43,13 @@
 		<url-pattern>/store/list</url-pattern>	
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>storeDetail</servlet-name>
+		<servlet-class>com.sinse.hiberasync.servlet.StoreDetail</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>storeDetail</servlet-name>
+		<url-pattern>/store/detail</url-pattern>	
+	</servlet-mapping>
+	
 </web-app>

@@ -87,6 +87,17 @@
 		xhttp.send();//요청 시점이 발생하는 시점
 	}
 	
+	function getDetail(store_id){
+		console.log(store_id);	
+		let xhttp=new XMLHttpRequest();
+		
+		xhttp.open("GET", "/store/detail?store_id="+store_id);
+		xhttp.onload=function(){
+			
+		};
+		xhttp.send();
+	}
+	
 	function printList(json){
 		let tag="<table width='90%'>";
 		tag+="<tr>";
@@ -98,7 +109,7 @@
 			tag+="</tr>";
 			tag+="<tr>";
 			tag+="<td>"+json[i].foodType.title+"</td>";
-			tag+="<td>"+json[i].store_name+"</td>";
+			tag+="<td><a href='javascript:getDetail("+json[i].store_id+")'>"+json[i].store_name+"</a></td>";
 			tag+="<td>"+json[i].tel+"</td>";
 			tag+="</tr>";
 		}
