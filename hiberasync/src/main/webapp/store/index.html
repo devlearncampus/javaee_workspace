@@ -88,7 +88,12 @@
 			//}
 		}
 		//전송 파라미터 만들기		
-		xhttp.send("food_type_id="+$("#aside_regist select").val()+"&store_name=김밥천국&tel=0101"); //이 시점부터 js는 자기 할일 하고, 브라우저가 통신을 담당..즉 비동기가 시작되는 시점		
+		let param="food_type_id="+$("#aside_regist select").val();
+		param+="&store_name="+$("#aside_regist input[name='store_name']").val();
+		param+="&tel="+$("#aside_regist input[name='tel']").val();
+		
+		//이 시점부터 js는 자기 할일 하고, 브라우저가 통신을 담당..즉 비동기가 시작되는 시점
+		xhttp.send(param); 		
 	}
 	
 	
