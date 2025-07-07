@@ -35,7 +35,7 @@ public class FoodTypeList extends HttpServlet{
 		//클라이언트가 원하는 컨텐츠가 html 문서가 아니라, html문서에 들어갈 일부 데이터인경우 
 		//개발자는 순수 데이터를 구성해야 한다..
 		PrintWriter out=response.getWriter();
-		response.setContentType("application/json;charset=utf-");
+		response.setContentType("application/json;charset=utf-8");
 	
 		//클라이언트에게 json 형식의 데이터를 전송할때, 문자열로 변환해야 하지만, 처리할 
 		//문자열이 너무 복잡하여 효율성이 떨어짐... java객체와 json 문자열과의 변환을 자동으로 처리
@@ -44,6 +44,8 @@ public class FoodTypeList extends HttpServlet{
 		String result=gson.toJson(list);  // java.util.List를 json 문자열로 변환, 문자열이기 때문에 전송이 가능..
 		
 		logger.debug("문자열로 변환 후 데이터 "+result);
+		out.print(result);//저장해 놓으면, Tomcat이 응답컨텐츠로 만들어서 보낸다..
+		
 		
 	}
 }
