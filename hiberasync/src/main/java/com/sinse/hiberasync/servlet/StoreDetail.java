@@ -23,7 +23,6 @@ public class StoreDetail extends HttpServlet{
 	Logger logger=LoggerFactory.getLogger(getClass());
 	StoreDAO storeDAO = new StoreDAO();
 	
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String store_id=request.getParameter("store_id");
 		
