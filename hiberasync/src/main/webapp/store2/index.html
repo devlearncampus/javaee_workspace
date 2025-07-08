@@ -153,6 +153,18 @@
 	
 	//삭제하기 
 	function del(){
+		$.ajax({
+			url:"/store/del",
+			type:"POST",
+			data:{
+				store_id:$("#aside_detail input[name='store_id']").val()
+			},
+			success:function(result, status, xhr){
+				if(xhr.status==204){
+					getStoreList();
+				}
+			}
+		});
 	}
 	
 	//수정하기
@@ -171,8 +183,7 @@
 					getStoreList();
 				}
 			}
-		});
-		
+		});		
 	}
 	
 	$(()=>{
