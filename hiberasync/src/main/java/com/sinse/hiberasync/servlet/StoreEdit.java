@@ -52,15 +52,17 @@ public class StoreEdit extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		
 		try {
-			storeDAO.update(store);
+			storeDAO.update(store);			
 			response.setStatus(HttpServletResponse.SC_NO_CONTENT);//204
+			message.setResult("success");
+			message.setMsg("수정성공");
 		} catch (StoreException e) {
 			e.printStackTrace();
 			message.setResult("fail");
 			message.setMsg(e.getMessage());
-			String responseMsg=gson.toJson(message);
-			out.print(responseMsg);
 		}
+		String responseMsg=gson.toJson(message);
+		out.print(responseMsg);
 		
 	}
 }

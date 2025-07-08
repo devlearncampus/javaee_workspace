@@ -78,7 +78,15 @@
 	
 	function getDetail(store_id){
 		$.ajax({
-
+			url:"/store/detail?store_id="+store_id,
+			type:"GET",
+			success:function(result, status, xhr){
+				//우측 화면 출력
+				$("#aside_detail input[name='store_id']").val(result.store_id);//hidden
+				$("#aside_detail select").val(result.foodType.food_type_id);
+				$("#aside_detail input[name='store_name']").val(result.store_name);
+				$("#aside_detail input[name='tel']").val(result.tel);				
+			}		
 		});
 	}
 	
@@ -143,12 +151,28 @@
 		});
 	}
 	
-	//수정하기
-	function edit(){
-	}
-	
 	//삭제하기 
 	function del(){
+	}
+	
+	//수정하기
+	function edit(){
+		$.ajax({
+			url:"/store/edit",
+			type:"POST",
+			data:{
+				food_type_id:$("#aside_detail select").val(),
+				store_id:$("#aside_detail input[name='store_id']").val(),
+				store_name:$("#aside_detail input[name='store_name']").val(),
+				tel:$("#aside_detail input[name='tel']").val()				
+			},
+			success:function(result, status, xhr){
+				if(xhr.status==204){
+					getStoreList();
+				}
+			}
+		});
+		
 	}
 	
 	$(()=>{
