@@ -195,6 +195,20 @@
 	
 	//삭제하기 
 	function del(){
+		let xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "/store/del");
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		
+		xhttp.onload=function(){
+			if(this.status==204){
+				getStoreList();
+			}else{
+				let json=JSON.parse(this.responseText);
+				alert(json.msg);
+			}
+		}
+		
+		xhttp.send("store_id="+$("#aside_detail input[name='store_id']").val());
 	}
 	
 	$(()=>{
@@ -208,7 +222,15 @@
 		});
 		
 		$("#bt_edit").click(()=>{
-			edit();
+			if(confirm("수정하시겠어요?")){
+				edit();
+			}
+		});
+		
+		$("#bt_del").click(()=>{
+			if(confirm("삭제하시겠어요?")){
+				del();
+			}
 		});
 		
 	});
