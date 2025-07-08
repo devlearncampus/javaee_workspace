@@ -175,6 +175,15 @@
 		xhttp.open("POST","/store/edit");
 		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		
+		xhttp.onload=function(){
+			if(this.status==204){
+				getStoreList();//새롭게 갱신될 목록을 요청
+			}else{
+				let json=JSON.parse(this.reponseText);
+				alert(json.msg);
+			}			
+		}
+		
 		//우측영역의 입력 컴포넌트들로부터 값을 대입하자~!
 		let param="store_id="+$("#aside_detail input[name='store_id']").val();
 		param+="&store_name="+$("#aside_detail input[name='store_name']").val();
