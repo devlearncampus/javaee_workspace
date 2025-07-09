@@ -76,7 +76,7 @@ input[type=button]:hover {
 		$("#bt_del").click(()=>{
 			if(confirm("삭제하시겠어요?")){
 				//Get방식 요청(링크)
-				location.href="/notice/del?notice_id=<%=notice_id%>";
+				location.href="/notice/del?notice_id=<%=notice.getNotice_id()%>";
 			}
 		});
 		
