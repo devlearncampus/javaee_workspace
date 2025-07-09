@@ -3,7 +3,6 @@ package com.sinse.mvcapp.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,10 +15,10 @@ import com.sinse.mvcapp.color.model.ColorManager;
  * 1) JSP는 View로 사용할 것이므로 ..
  * 2) 웹기반의 컨트롤러는 클라이언트의 요청을 받는 능력이 잇어야 하므로 .  
  * */
-public class ColorController{
+public class ColorController implements Controller{
 	ColorManager manager=new ColorManager();
 	
-	protected void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*컨트롤러의 5대 업무
 		 * 1) 요청을 받는다
 		 * 2) 요청을 분석한다 

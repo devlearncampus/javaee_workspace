@@ -9,7 +9,11 @@
 	 -->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
-	<servlet-class>com.sinse.mvcapp.controller.DispatcherServlet</servlet-class>
+		<servlet-class>com.sinse.mvcapp.controller.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/servlet-mapping.data</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
