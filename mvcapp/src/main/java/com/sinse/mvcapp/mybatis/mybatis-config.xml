@@ -9,10 +9,10 @@
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" 	value="com.mysql.cj.jdbc.Driver" />
-				<property name="url" 		value="jdbc:mysql://localhost:3306/spring4" />
-				<property name="username" value="spring4" />
-				<property name="password" value="1234" />
+				<property name="driver" 		value="com.mysql.cj.jdbc.Driver" />
+				<property name="url" 				value="jdbc:mysql://localhost:3306/spring4" />
+				<property name="username" 	value="spring4" />
+				<property name="password" 	value="1234" />
 			</dataSource>
 		</environment>
 	</environments>

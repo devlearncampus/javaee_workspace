@@ -1,16 +1,8 @@
-<%@page import="com.sinse.mvcapp.repository.NoticeDAO"%>
 <%@page import="com.sinse.mvcapp.model.Notice"%>
 <%@page import="java.util.List"%>
-
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%!
-	//list.jsp가 톰켓에 의해, 서블릿으로 작성될때 멤버 영역 (선언부)
-	NoticeDAO noticeDAO;
-%>
 <%
-	//요청을 받는 service() 메서드 영역
-	noticeDAO=new NoticeDAO();
-	List<Notice> list=noticeDAO.selectAll();
+	List<Notice> list=(List)session.getAttribute("noticeList");
 %>
 <!DOCTYPE html>
 <html>
