@@ -5,6 +5,7 @@
 /color.do=com.sinse.mvcapp.controller.ColorController
 /notice/list.do=com.sinse.mvcapp.controller.notice.ListController
 /notice/regist.do=com.sinse.mvcapp.controller.notice.RegistController
+/notice/content.do=com.sinse.mvcapp.controller.notice.DetailController
 
 
 #[뷰페이지 매핑]
@@ -12,3 +13,4 @@
 /color/result/view=/color/result.jsp
 /notice/list/view=/notice/list.jsp
 /notice/regist/view=/notice/list.do
+/notice/detail/view=/notice/content.jsp

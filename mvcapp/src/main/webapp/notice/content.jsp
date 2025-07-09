@@ -1,18 +1,7 @@
 <%@page import="com.sinse.mvcapp.model.Notice"%>
-<%@page import="com.sinse.mvcapp.repository.NoticeDAO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-
-<%! NoticeDAO noticeDAO=new NoticeDAO(); %>
 <%
-	//요청 객체로부터 파라미터 뽑아내기
-	//이 스크립틀릿 영역은 이 jsp가 서블릿으로 변경되어질때, service() 메서드 영역이므로, 이미 service()메서드
-	//의 매개변수 요청 객체와 응답객체를 넘겨받은 상태..
-	//service(HttpServletRequest request, HttpServletResponse response)
-	String notice_id=request.getParameter("notice_id");
-	
-	//String sql="select * from notice where notice_id="+notice_id;
-	//out.print(sql);	
-	Notice notice=noticeDAO.select(Integer.parseInt(notice_id));
+	Notice notice=(Notice)session.getAttribute("notice");
 %>
 
 <!DOCTYPE html>
