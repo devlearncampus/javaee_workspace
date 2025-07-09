@@ -6,13 +6,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/color.do" method="get">	
-		<select name="color">
+	<form action="/blood.do" method="post">	
+		<select name="blood">
 			<option value="">색상 선택</option>		
-			<option value="red">Red</option>		
-			<option value="blue">Blue</option>		
-			<option value="yellow">Yellow</option>		
-			<option value="green">Green</option>		
+			<option value="A">A형</option>		
+			<option value="B">B형</option>		
+			<option value="O">O형</option>		
+			<option value="AB">AB형</option>		
 		</select>
 		<button>전송</button>
 	</form>

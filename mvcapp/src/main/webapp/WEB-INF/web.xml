@@ -2,7 +2,30 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>mvcapp</display-name>
 	
+	<!-- 
+		 MVC 개발 방법론의 원칙대로 웹애플리케이션을 개발하면, 모든 요청마다 1:1 대응하는 매핑을 
+		 작성해야 하므로, web.xml의 복잡해지므로, 유지보수성을 높이기 위해서는 모든 요청을 하나의 진입점
+		 으로 처리한다...(예-대기업의 AS센터)	
+	 -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+	<servlet-class>com.sinse.mvcapp.controller.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!--색상에 대한 요청 -->
+	<!-- 	
 	<servlet>
 		<servlet-name>colorController</servlet-name>
 		<servlet-class>com.sinse.mvcapp.controller.ColorController</servlet-class>
@@ -11,5 +34,15 @@
 		<servlet-name>colorController</servlet-name>
 		<url-pattern>/color/advice</url-pattern>
 	</servlet-mapping>
-	
+	 -->
+	<!--혈액형에 대한 요청
+	<servlet>
+		<servlet-name>bloodController</servlet-name>
+		<servlet-class>com.sinse.mvcapp.controller.BloodController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>bloodController</servlet-name>
+		<url-pattern>/blood/advice</url-pattern>
+	</servlet-mapping>
+	 -->
 </web-app>
