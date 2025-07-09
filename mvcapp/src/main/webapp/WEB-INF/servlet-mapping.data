@@ -1,4 +1,10 @@
 #if문을 대체하기 위해 java.util.Map 형식을 갖는 데이터 정의
  
+#[컨트롤러 매핑]
 /blood.do=com.sinse.mvcapp.controller.BloodController
 /color.do=com.sinse.mvcapp.controller.ColorController
+
+
+#[뷰페이지 매핑]
+/blood/result/view=/blood/result.jsp
+/color/result/view=/color/result.jsp

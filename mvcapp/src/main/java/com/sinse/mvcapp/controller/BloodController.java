@@ -25,10 +25,13 @@ public class BloodController implements Controller{
 		//4) 뷰로 가져갈 것이 있다면 저장 
 		HttpSession session = request.getSession();
 		session.setAttribute("msg", result);
-		//5) 알맞는 뷰 보여주기 
-		response.sendRedirect("/blood/result.jsp");
 		
 	}
+	@Override
+	public String getViewPage() {
+		return "/blood/result/view";
+	}
+	
 }
 
 

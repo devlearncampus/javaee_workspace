@@ -38,9 +38,15 @@ public class ColorController implements Controller{
 		//result.jsp를 클라이언트가 보도록 처리.. .
 		//클라이언트로 하여금 지정된 url로 다시 요청을 시도하도록 강제
 		//즉 톰켓이 응답정보를 이용하여 응답 컨텐츠를 보내고 나서, 클라이인트가 다시 접속할 주소..
-		response.sendRedirect("/color/result.jsp"); 
+		//response.sendRedirect("/color/result/view"); 
 		// <script>location.href='/color/result.jsp'</script> 와 동일한 효과를 냄
 	}
+	
+	@Override
+	public String getViewPage() {
+		return "/color/result/view";
+	}
+		
 }
 
 

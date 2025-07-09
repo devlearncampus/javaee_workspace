@@ -70,6 +70,10 @@ public class DispatcherServlet extends HttpServlet{
 			Class clazz=Class.forName(props.getProperty(request.getRequestURI()));
 			controller=(Controller)clazz.newInstance();
 			controller.execute(request, response); //컨트롤러 실행
+
+			//5) 알맞는 뷰 보여주기 
+			response.sendRedirect(props.getProperty(controller.getViewPage()));
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e) {
