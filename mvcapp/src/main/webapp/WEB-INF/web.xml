@@ -2,6 +2,21 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>mvcapp</display-name>
 	
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>com.sinse.mvcapp.util.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+		
+	
 	<!-- 
 		 MVC 개발 방법론의 원칙대로 웹애플리케이션을 개발하면, 모든 요청마다 1:1 대응하는 매핑을 
 		 작성해야 하므로, web.xml의 복잡해지므로, 유지보수성을 높이기 위해서는 모든 요청을 하나의 진입점

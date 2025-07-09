@@ -38,17 +38,14 @@ input[type=button]:hover {
   padding: 20px;
 }
 </style>
-<%@ include file="/inc/head_link.jsp" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(()=>{		
-		$("#content").summernote({
-			height:250
-		});	//서머노트 연동 
 		
 		//버튼에 이벤트 연결 
 		$("input[type='button']").click(()=>{
 			$("form").attr({
-				action:"/notice/regist",
+				action:"/notice/regist.do",
 				method:"POST",  
 			});
 			$("form").submit(); //전송
