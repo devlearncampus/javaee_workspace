@@ -16,6 +16,7 @@
 #[게시판 View 매핑]
 /notice/list/view=/notice/list.jsp
 /notice/detail/view=/notice/content.jsp
+/notice/regist/view=/notice/list.do
 
 
 
