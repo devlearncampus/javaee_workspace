@@ -13,4 +13,4 @@
 /color/result/view=/color/result.jsp
 /notice/list/view=/notice/list.jsp
 /notice/regist/view=/notice/list.do
-/notice/detail/view=/notice/content.jsp
+/notice/detail/view=/notice/content.do

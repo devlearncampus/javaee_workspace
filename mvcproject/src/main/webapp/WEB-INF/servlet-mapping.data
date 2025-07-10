@@ -1,0 +1,11 @@
+#[컨트롤러 매핑]
+/blood.do=mvcproject.blood.controller.BloodController
+/color.do=mvcproject.color.controller.ColorController
+
+
+#[게시판 컨트롤러 매핑]
+/notice/list.do=mvcproject.notice.controller.ListController
+/notice/regist=mvcproject.notice.controller.RegistController
+/notice/detail=mvcproject.notice.controller.DetailController
+/notice/edit=mvcproject.notice.controller.EditController
+/notice/del=mvcproject.notice.controller.DeleteController

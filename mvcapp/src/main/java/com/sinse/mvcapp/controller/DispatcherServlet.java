@@ -68,6 +68,7 @@ public class DispatcherServlet extends HttpServlet{
 		//new 연산자 만이 인스턴스를 생성할수 있는 건 아니다!!!
 		try {
 			Class clazz=Class.forName(props.getProperty(request.getRequestURI()));
+			
 			controller=(Controller)clazz.newInstance();
 			controller.execute(request, response); //컨트롤러 실행
 
