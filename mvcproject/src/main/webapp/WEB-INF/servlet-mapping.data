@@ -17,6 +17,7 @@
 /notice/list/view=/notice/list.jsp
 /notice/detail/view=/notice/content.jsp
 /notice/regist/view=/notice/list.do
+/notice/delete/view=/notice/list.do
 
 
 

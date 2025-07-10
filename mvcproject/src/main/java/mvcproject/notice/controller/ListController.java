@@ -21,7 +21,10 @@ public class ListController implements Controller{
 		//4단계 : 결과 저장
 		request.setAttribute("noticeList", noticeList);
 	}
-
+	@Override
+	public boolean isForward() {
+		return true;
+	}
 	public String getViewName() {
 		return "/notice/list/view";
 	}

@@ -31,8 +31,11 @@ public class RegistController implements Controller{
 	}
 
 	@Override
+	public boolean isForward() {
+		return false; //포워딩 하지 마세요~~~, 브라우저로 하여금 새로 들어오게 함
+	}
+
 	public String getViewName() {
-	
 		return "/notice/regist/view"; //목록 보여주기
 	}
 	
