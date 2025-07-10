@@ -66,7 +66,7 @@ input[type=button]:hover {
 				//서버로 입력폼의 내용을 모두 가져가야 하므로, Post 방식으로 보내야 함 
 				$("form").attr({
 					method:"POST", 
-					action:"/notice/update"
+					action:"/notice/edit.do"
 				});
 				$("form").submit();
 			}
