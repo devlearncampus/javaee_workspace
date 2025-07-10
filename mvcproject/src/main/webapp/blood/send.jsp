@@ -28,7 +28,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/blood/서블릿에게" method="post">	
+	<form action="/blood.do" method="post">	
 		<select name="blood">
 			<option value="">색상 선택</option>		
 			<option value="A">A형</option>		

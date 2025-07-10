@@ -7,6 +7,6 @@
 </head>
 <body>
 	당신이 선택한 혈액형에 대한 결과 <br>
-	<%out.print(session.getAttribute("msg")); %>
+	<%out.print(request.getAttribute("msg")); %>
 </body>
 </html>

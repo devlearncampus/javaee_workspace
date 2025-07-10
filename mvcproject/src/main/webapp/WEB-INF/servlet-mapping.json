@@ -2,9 +2,6 @@
 /blood.do=mvcproject.blood.controller.BloodController
 /color.do=mvcproject.color.controller.ColorController
 
-[뷰매핑]
-/blood/view=/blood/result.jsp
-
 
 #[게시판 컨트롤러 매핑]
 /notice/list.do=mvcproject.notice.controller.ListController
