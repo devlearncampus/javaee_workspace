@@ -12,3 +12,10 @@
 /notice/detail=mvcproject.notice.controller.DetailController
 /notice/edit=mvcproject.notice.controller.EditController
 /notice/del=mvcproject.notice.controller.DeleteController
+
+#[게시판 View 매핑]
+/notice/list/view=/notice/list.jsp
+
+
+
+
