@@ -1,7 +1,7 @@
-<%@page import="com.sinse.mvcapp.model.Notice"%>
+<%@page import="mvcproject.notice.domain.Notice"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
-	Notice notice=(Notice)session.getAttribute("notice");
+	Notice notice=(Notice)request.getAttribute("notice");
 %>
 
 <!DOCTYPE html>

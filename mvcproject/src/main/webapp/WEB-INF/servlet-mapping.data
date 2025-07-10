@@ -8,13 +8,14 @@
 
 #[게시판 컨트롤러 매핑]
 /notice/list.do=mvcproject.notice.controller.ListController
-/notice/regist=mvcproject.notice.controller.RegistController
-/notice/detail=mvcproject.notice.controller.DetailController
-/notice/edit=mvcproject.notice.controller.EditController
-/notice/del=mvcproject.notice.controller.DeleteController
+/notice/regist.do=mvcproject.notice.controller.RegistController
+/notice/detail.do=mvcproject.notice.controller.DetailController
+/notice/edit.do=mvcproject.notice.controller.EditController
+/notice/del.do=mvcproject.notice.controller.DeleteController
 
 #[게시판 View 매핑]
 /notice/list/view=/notice/list.jsp
+/notice/detail/view=/notice/content.jsp
 
 
 
