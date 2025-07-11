@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>myframework</display-name>
+	
+	<!--웹사이트의 요청을 관리자와 일반유저의 요청으로 분기 따라서 DispatcherServlet이 두개로 구분 -->
+
+	<servlet>
+		<servlet-name>userDispatcher</servlet-name>
+		<servlet-class>myframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/user-servlet.json</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>userDispatcher</servlet-name>
+		<url-pattern>/shop/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>adminDispatcher</servlet-name>
+		<servlet-class>myframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/admin-servlet.json</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>adminDispatcher</servlet-name>
+		<url-pattern>/secure/*</url-pattern>
+	</servlet-mapping>
+
+</web-app>
+
+
+
+
+
+

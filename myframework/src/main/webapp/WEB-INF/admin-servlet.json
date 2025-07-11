@@ -1,0 +1,18 @@
+{
+	"mappingType":"myframework.web.handler.SimpleUrlHandlerMapping",
+	
+	"controllerMappings":{
+		"/shop/notice/list" : "myframework.shop.notice.controller.ListController",
+		"/shop/notice/write" : "myframework.shop.notice.controller.WriteController",
+		"/shop/notice/detail" : "myframework.shop.notice.controller.DetailController",
+		"/shop/notice/edit" : "myframework.shop.notice.controller.EditController",
+		"/shop/notice/delete" : "myframework.shop.notice.controller.DeleteController"
+	},
+	"viewMappings":{
+		"/shop/notice/list/view" : "/shop/notice/list.jsp",
+		"/shop/notice/write/view" : "/shop/notice/list",
+		"/shop/notice/detail/view" : "/shop/notice/detail.jsp",
+		"/shop/notice/list/edit" : "/shop/notice/detail.jsp",
+		"/shop/notice/list/delete" : "/shop/notice/list"	
+	}
+}
