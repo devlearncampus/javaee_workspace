@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import myframework.web.handler.HandlerMapping;
+
 //웹애플리케이션의 모든 요청을 1차적으로 처리하는 전면 컨트롤러 
 public class DispatcherServlet extends HttpServlet{
 	Logger logger=LoggerFactory.getLogger(getClass());
@@ -38,6 +40,15 @@ public class DispatcherServlet extends HttpServlet{
 		try(FileReader reader=new FileReader(realPath)){
 			JsonObject root=JsonParser.parseReader(reader).getAsJsonObject();
 			logger.debug("root ="+root);
+			
+			String mappingType=root.get("mappingType").getAsString();
+			logger.debug("우리가 사용할 핸들러 매핑은 "+mappingType);
+			
+			//동작할 HandlerMapping이 누구인지는 모르지만, 그 패키지를 포함한 클래스명이 mappingType에 
+			//들어있으므로, 스트링을 이용한 클래스 로드를 수행할 수있는 Class.forName()
+			Class clazz=Class.forName(mappingType);
+			HandlerMapping handlerMapping=(HandlerMapping)clazz.newInstance();
+			handlerMapping.setRoot(root);
 			
 		}catch(Exception e) {
 			
