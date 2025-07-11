@@ -12,9 +12,11 @@ public class DispatcherServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doRequest(request, response);
 	}
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doRequest(request, response);
 	}
 	
 	protected void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
