@@ -76,7 +76,7 @@ public class DispatcherServlet extends HttpServlet{
 		
 		logger.debug("요청 uri "+uri);
 		logger.debug("controller is "+controller);
-		//controller.execute(request, response); //다형성으로 동작햇음..
+		controller.execute(request, response); //다형성으로 동작햇음..
 		
 	}
 	
