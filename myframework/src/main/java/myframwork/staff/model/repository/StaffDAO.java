@@ -11,14 +11,11 @@ public class StaffDAO {
 	MybatisConfig config=MybatisConfig.getInstance();
 	
 	//등록 
-	public void insert(Staff staff) throws StaffException{
-		SqlSession sqlSession  = config.getSqlSession();
+	public void insert(SqlSession sqlSession, Staff staff) throws StaffException{
 		int result = sqlSession.insert("Staff.insert", staff);
 		if(result <1) {
 			throw new StaffException("Staff 등록실패");
 		}
-		sqlSession.commit();
-		sqlSession.close();
 	}
 	
 }

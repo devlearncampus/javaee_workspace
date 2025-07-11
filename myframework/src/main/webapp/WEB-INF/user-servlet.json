@@ -14,6 +14,12 @@
 		"/shop/notice/write/view" : "/shop/notice/list",
 		"/shop/notice/detail/view" : "/user/notice/content.jsp",
 		"/shop/notice/edit/view" : "/user/notice/detail.jsp",
-		"/shop/notice/delete/view" : "/shop/notice/list"	
+		"/shop/notice/delete/view" : "/shop/notice/list",
+		"/shop/staff/regist/view" : "/user/staff/result.jsp"
+			
 	}
 }
+
+
+
+

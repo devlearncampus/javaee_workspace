@@ -10,14 +10,13 @@ public class BioDAO {
 
 	MybatisConfig config=MybatisConfig.getInstance();
 	
-	public void insert(Bio bio) throws BioException{
-		SqlSession sqlSession = config.getSqlSession();
+	public void insert(SqlSession sqlSession, Bio bio) throws BioException{
+
 		int result = sqlSession.insert("Bio.insert", bio);
 		if(result <1) {
 			throw new BioException("Staff의 신체정보 등록 실패");
 		}
-		sqlSession.commit();
-		sqlSession.close();
+
 	}
 	
 }
