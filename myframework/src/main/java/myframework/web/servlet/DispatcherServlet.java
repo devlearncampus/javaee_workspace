@@ -74,7 +74,9 @@ public class DispatcherServlet extends HttpServlet{
 		String uri=request.getRequestURI();
 		Controller controller=handlerMapping.getController(uri);
 		
-		controller.execute(request, response); //다형성으로 동작햇음..
+		logger.debug("요청 uri "+uri);
+		logger.debug("controller is "+controller);
+		//controller.execute(request, response); //다형성으로 동작햇음..
 		
 	}
 	

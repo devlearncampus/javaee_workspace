@@ -46,7 +46,7 @@ public class SimpleUrlHandlerMapping implements HandlerMapping{
 			
 			try {
 				Controller controller=(Controller)Class.forName(controllerName).newInstance();
-				controllerMap.put(controllerName, controller);
+				controllerMap.put(uri, controller);
 				
 			} catch (InstantiationException e) {
 				e.printStackTrace();
@@ -55,9 +55,8 @@ public class SimpleUrlHandlerMapping implements HandlerMapping{
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			
 		}
-		
+		logger.debug("갯수는 "+controllerMap.size());
 	}
 
 	@Override
