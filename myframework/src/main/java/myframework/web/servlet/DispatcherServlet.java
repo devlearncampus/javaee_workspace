@@ -29,6 +29,8 @@ public class DispatcherServlet extends HttpServlet{
 	 * 이 서블릿에게 반환한다..왜?? 어제까지는 요청이 들어올때마다 하위 컨트롤러의 인스턴스를 생성하는 방식이기
 	 * 메모리 낭비.. 
 	 * */
+	HandlerMapping handlerMapping;//이 핸들러에 동생 인스턴스들이 uri 키값을 가지고 모여있다.
+	
 	public void init(ServletConfig config) throws ServletException {
 		//초기화 파라미터 읽기 ( 설정파일의 위치 얻기)  
 		String contextConfigLocation=config.getInitParameter("contextConfigLocation");
@@ -47,7 +49,7 @@ public class DispatcherServlet extends HttpServlet{
 			//동작할 HandlerMapping이 누구인지는 모르지만, 그 패키지를 포함한 클래스명이 mappingType에 
 			//들어있으므로, 스트링을 이용한 클래스 로드를 수행할 수있는 Class.forName()
 			Class clazz=Class.forName(mappingType);
-			HandlerMapping handlerMapping=(HandlerMapping)clazz.newInstance();
+			handlerMapping=(HandlerMapping)clazz.newInstance();
 			handlerMapping.setRoot(root);
 			handlerMapping.initialize();
 			
@@ -67,7 +69,13 @@ public class DispatcherServlet extends HttpServlet{
 	}
 	
 	protected void doRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
+		//해당 요청을 처리
+		String uri=request.getRequestURI();
+		Controller controller=handlerMapping.getController(uri);
+		
+		controller.execute(request, response); //다형성으로 동작햇음..
+		
 	}
 	
 }

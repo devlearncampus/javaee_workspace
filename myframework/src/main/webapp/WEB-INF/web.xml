@@ -42,7 +42,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>adminDispatcher</servlet-name>
-		<url-pattern>/secure/*</url-pattern>
+		<url-pattern>/admin/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>

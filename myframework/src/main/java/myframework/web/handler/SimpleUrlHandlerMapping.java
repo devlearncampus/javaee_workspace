@@ -62,8 +62,13 @@ public class SimpleUrlHandlerMapping implements HandlerMapping{
 
 	@Override
 	public Controller getController(String uri) {
-		return null;
+		return controllerMap.get(uri);
 	}
 	
 	
 }
+
+
+
+
+
