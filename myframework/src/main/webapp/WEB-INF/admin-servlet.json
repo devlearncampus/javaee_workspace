@@ -9,10 +9,10 @@
 		"/admin/notice/delete" : "myframework.admin.notice.controller.DeleteController"
 	},
 	"viewMappings":{
-		"/admin/notice/list/view" : "/admin/notice/list.jsp",
+		"/admin/notice/list/view" : "/secure/notice/list.jsp",
 		"/admin/notice/write/view" : "/admin/notice/list",
-		"/admin/notice/detail/view" : "/admin/notice/content.jsp",
-		"/admin/notice/edit/view" : "/admin/notice/detail.jsp",
+		"/admin/notice/detail/view" : "/secure/notice/content.jsp",
+		"/admin/notice/edit/view" : "/secure/notice/detail.jsp",
 		"/admin/notice/delete/view" : "/admin/notice/list"	
 	}
 }

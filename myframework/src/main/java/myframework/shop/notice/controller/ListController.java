@@ -1,4 +1,4 @@
-package myframework.admin.notice.controller;
+package myframework.shop.notice.controller;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class ListController implements Controller{
 
 	@Override
 	public String getViewName() {
-		return "/admin/notice/list/view";
+		return "/shop/notice/list/view";
 	}
 
 	@Override

@@ -2,7 +2,9 @@ package myframework.web.servlet;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -29,6 +31,7 @@ public class DispatcherServlet extends HttpServlet{
 	 * 이 서블릿에게 반환한다..왜?? 어제까지는 요청이 들어올때마다 하위 컨트롤러의 인스턴스를 생성하는 방식이기
 	 * 메모리 낭비.. 
 	 * */
+	JsonObject root;//설정 파일인 .json을 파싱한 Gson 의 객체 
 	HandlerMapping handlerMapping;//이 핸들러에 동생 인스턴스들이 uri 키값을 가지고 모여있다.
 	
 	public void init(ServletConfig config) throws ServletException {
@@ -40,7 +43,7 @@ public class DispatcherServlet extends HttpServlet{
 		String realPath = context.getRealPath(contextConfigLocation);
 		
 		try(FileReader reader=new FileReader(realPath)){
-			JsonObject root=JsonParser.parseReader(reader).getAsJsonObject();
+			root=JsonParser.parseReader(reader).getAsJsonObject();
 			logger.debug("root ="+root);
 			
 			String mappingType=root.get("mappingType").getAsString();
@@ -78,6 +81,27 @@ public class DispatcherServlet extends HttpServlet{
 		logger.debug("controller is "+controller);
 		controller.execute(request, response); //다형성으로 동작햇음..
 		
+		//하위 컨트롤러로부터 반환받은 뷰의이름으로 가지고, 
+		JsonObject viewMappings =root.getAsJsonObject("viewMappings");
+		Iterator<String> it=viewMappings.keySet().iterator();
+		
+		String viewPage=null;
+		
+		while(it.hasNext()) {
+			String viewName=it.next(); //??
+			if(controller.getViewName().equals(viewName)) {
+				viewPage=viewMappings.get(viewName).getAsString();
+				break;
+			}
+		}
+		
+		//구해온 결과 페이지를 포워딩으로 처리할 경우 
+		if(controller.isForward()) {
+			RequestDispatcher dis=request.getRequestDispatcher(viewPage);
+			dis.forward(request, response); //포워딩 발생 
+		}else {//클라이언트로 하여금 결과 페이지를 재접속하게 처리할 경우 (redirect)
+			response.sendRedirect(viewPage);
+		}
 	}
 	
 }
