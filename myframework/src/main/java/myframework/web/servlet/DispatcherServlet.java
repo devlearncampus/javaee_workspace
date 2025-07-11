@@ -49,6 +49,7 @@ public class DispatcherServlet extends HttpServlet{
 			Class clazz=Class.forName(mappingType);
 			HandlerMapping handlerMapping=(HandlerMapping)clazz.newInstance();
 			handlerMapping.setRoot(root);
+			handlerMapping.initialize();
 			
 		}catch(Exception e) {
 			
