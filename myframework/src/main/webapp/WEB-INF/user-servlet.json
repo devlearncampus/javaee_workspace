@@ -6,7 +6,8 @@
 		"/shop/notice/write" : "myframework.shop.notice.controller.WriteController",
 		"/shop/notice/detail" : "myframework.shop.notice.controller.DetailController",
 		"/shop/notice/edit" : "myframework.shop.notice.controller.EditController",
-		"/shop/notice/delete" : "myframework.shop.notice.controller.DeleteController"
+		"/shop/notice/delete" : "myframework.shop.notice.controller.DeleteController",
+		"/shop/staff/regist" : "myframework.shop.staff.controller.RegistController"
 	},
 	"viewMappings":{
 		"/shop/notice/list/view" : "/user/notice/list.jsp",
