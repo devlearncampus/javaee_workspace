@@ -22,5 +22,24 @@
 			<artifactId>spring-context</artifactId>
 			<version>4.3.30.RELEASE</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.14</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.14</version>
+		</dependency>		
 	</dependencies>
+	
 </project>
+
+
+
+
+
