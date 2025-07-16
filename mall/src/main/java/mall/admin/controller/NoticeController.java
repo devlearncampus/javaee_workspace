@@ -68,7 +68,7 @@ public class NoticeController {
 		try {
 			noticeService.regist(notice);
 			//성공 뷰결과페이지
-			mav.setViewName("redirect:/admin/notice/list");
+			mav.setViewName("redirect:/admin/notice/list"); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			//에러페이지

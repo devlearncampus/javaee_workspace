@@ -4,6 +4,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.hibernate.SessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jndi.JndiTemplate;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -88,6 +91,27 @@ public class AdminWebConfig {
 	public SqlSessionTemplate sqlSessionTemplate() throws Exception{
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
+	
+	
+	/*--------------------------------------------------------------
+	Hibernate 관련 
+	--------------------------------------------------------------*/
+	@Bean
+	public LocalSessionFactoryBean sessionFactory() throws NamingException {
+		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+		
+		factoryBean.setDataSource(dataSource()); //어떤 DB를 사용할지
+		
+		return null;
+	}
+	
+	//트랜잭션 매니저 등록 
+	@Bean
+	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+		return new HibernateTransactionManager(sessionFactory);
+	}
+	
+	
 }
 
 
