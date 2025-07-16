@@ -1,4 +1,4 @@
-package springapp.cook;
+package malltest.cook;
 
 public class Induction implements Pan{
 

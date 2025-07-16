@@ -1,4 +1,4 @@
-package springapp.cook;
+package malltest.cook;
 
 public class Cook {
 	//Fripan pan; //너무 정확한 자료형으로 has a 관계를 사용 시 , 객체간 결합도가 너무 높음

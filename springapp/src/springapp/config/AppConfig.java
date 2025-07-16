@@ -1,11 +1,11 @@
-package springapp.config;
+package malltest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import springapp.cook.Cook;
-import springapp.cook.FriPan;
-import springapp.cook.Induction;
+import malltest.cook.Cook;
+import malltest.cook.FriPan;
+import malltest.cook.Induction;
 
 /*  
 전통적인 스프링의 개발 방식에서는 주로 XML 이 사용되었으나, spring 2.5 버전부터 java 클래스에서도

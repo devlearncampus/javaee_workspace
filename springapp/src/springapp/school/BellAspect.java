@@ -1,4 +1,4 @@
-package springapp.school;
+package malltest.school;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

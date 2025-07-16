@@ -34,8 +34,6 @@ public class NoticeController {
 		return "notice/write";
 	}
 	
-	
-	
 	//메서드 호출 후, 반환할 값이 없을때, 즉 저장할 것이 없을때는 
 	//ModelAndView 중 View만 반환하면 되므로, 이때는 String으로 대체해도 됨 
 	//예)  notice/detail --> String 을 넘겨받은 DispatcherServlet 이  
@@ -45,10 +43,33 @@ public class NoticeController {
 		logger.debug("글쓰기 요청 받음");
 		
 		//개발자가 redirect를 명시하지 않으면 스프링은 디폴트 forward 임
-		return "redirect:/shop/notice/list";
+		return "redirect:/shop/notice/list"; //response.sendRedirect("/notice/list")
 	}
 	
+	@RequestMapping("/notice/detail")
+	public ModelAndView getDetail() {
+		logger.debug("상세보기 요청 받음");
+		return null;
+	}
+
+	@RequestMapping(value="/notice/update", method=RequestMethod.GET)
+	public String update() {
+		logger.debug("수정 요청 받음");
+		
+		return "redirect:/shop/notice/detail?notice_id=33";  //response.sendRedirect("")
+	}
+	
+	@RequestMapping(value="/notice/delete", method=RequestMethod.GET)
+	public String delete() {
+		logger.debug("삭제 요청 받음");
+		return "redirect:/shop/notice/list";
+	}
 }
+
+
+
+
+
 
 
 

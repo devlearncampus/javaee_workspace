@@ -1,4 +1,4 @@
-package springapp.gui;
+package malltest.gui;
 
 import java.awt.FlowLayout;
 

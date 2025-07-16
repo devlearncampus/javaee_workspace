@@ -1,9 +1,9 @@
-package springapp.cook;
+package malltest.cook;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import springapp.config.AppConfig;
+import malltest.config.AppConfig;
 
 public class AppMain {
 	

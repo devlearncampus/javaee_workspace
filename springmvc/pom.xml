@@ -14,8 +14,8 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencies>
 
+	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -1,4 +1,4 @@
-package springapp.school;
+package malltest.school;
 
 //애플리케션에 중복되는 공통 코드를, 별도의 객체로 분리시켜 공통 관심사로 놓자 
 //즉, 하나의 외부의 관점(Aspect)으로 둔다 

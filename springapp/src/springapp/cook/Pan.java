@@ -1,4 +1,4 @@
-package springapp.cook;
+package malltest.cook;
 
 /*
  * 애플리케이션의 규모가 큰 엔터프라이즈 급 일때는, 유지보수성을 높이는 것이 

@@ -1,4 +1,4 @@
-package springapp.school;
+package malltest.school;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
