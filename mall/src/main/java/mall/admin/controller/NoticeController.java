@@ -34,15 +34,15 @@ public class NoticeController {
 		//ModelAndView 객체는 Model과 View를 합쳐놓은 객체임 
 		//Model 객체에 정보를 담으면 request.setAttribute() 와 동일한 효과 
 		//View 에는 DispatcherServlet에게 전달할 페이지파일명이 아닌 이름을 전달하는 용도 
-		ModelAndView mav = new ModelAndView(); 
-		mav.setViewName("notice/list");
-		
 		log.debug("목록 요청 받음");
 		
 		//3단계: 일 시키기 
 		List noticeList=noticeService.selectAll(); //서비스 메서드 호출
 		
+		log.debug("noticeList is "+noticeList);
+		
 		//4단계: 결과 저장
+		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("noticeList", noticeList);
 		mav.setViewName("secure/notice/list"); //이것만 넘기면 DispatcherServlet , ViewResolver에게 해석 맡김
 		return mav;

@@ -20,7 +20,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
-	@Override
+	@Transactional
 	public List selectAll() {
 		log.debug("service의 selectAll() 도달");
 		return noticeDAO.selectAll(); //DAO의 메서드 호출

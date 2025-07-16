@@ -69,6 +69,7 @@ public class AdminWebConfig {
 	
 	//Mybatis에 사용할 트랜잭션 매니저 선택
 	@Bean 
+	//@Primary
 	public PlatformTransactionManager platformTransactionManager(SqlSessionFactory sqlSessionFactory) {
 		return new DataSourceTransactionManager(sqlSessionFactory.getConfiguration().getEnvironment().getDataSource());
 	}
@@ -109,8 +110,9 @@ public class AdminWebConfig {
 	}
 	
 	//트랜잭션 매니저 등록 
-	@Primary //여러개의 트랜잭션 매니져 중 최우선 순위를 등록
+	 //여러개의 트랜잭션 매니져 중 최우선 순위를 등록
 	@Bean
+	@Primary
 	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		return new HibernateTransactionManager(sessionFactory);
 	}
