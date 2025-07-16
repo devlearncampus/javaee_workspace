@@ -10,12 +10,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 */
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan(basePackages = {"mall.admin.controller, mall.notice.model"})
 public class AdminWebConfig {
 
@@ -99,13 +102,14 @@ public class AdminWebConfig {
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() throws NamingException {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-		
+		factoryBean.setConfigLocation(new ClassPathResource("mall/hibernate/hibernate.cfg.xml"));
 		factoryBean.setDataSource(dataSource()); //어떤 DB를 사용할지
 		
-		return null;
+		return factoryBean;
 	}
 	
 	//트랜잭션 매니저 등록 
+	@Primary //여러개의 트랜잭션 매니져 중 최우선 순위를 등록
 	@Bean
 	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		return new HibernateTransactionManager(sessionFactory);
