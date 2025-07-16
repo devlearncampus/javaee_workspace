@@ -45,7 +45,7 @@ input[type=button]:hover {
 		//버튼에 이벤트 연결 
 		$("input[type='button']").click(()=>{
 			$("form").attr({
-				action:"/notice/regist.do",
+				action:"/admin/notice/regist",
 				method:"POST",  
 			});
 			$("form").submit(); //전송

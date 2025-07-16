@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import mall.domain.Notice;
+import mall.exception.NoticeException;
 
 @Slf4j
 @Service
@@ -30,9 +31,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public void regist(Notice notice) {
-		// TODO Auto-generated method stub
-		
+	public void regist(Notice notice) throws NoticeException{
+		noticeDAO.insert(notice);
 	}
 
 	@Override

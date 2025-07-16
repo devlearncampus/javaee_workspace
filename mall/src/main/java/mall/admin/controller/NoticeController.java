@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
+import mall.domain.Notice;
 import mall.notice.model.NoticeService;
 
 
@@ -42,12 +44,43 @@ public class NoticeController {
 		
 		//4단계: 결과 저장
 		mav.addObject("noticeList", noticeList);
-		mav.setViewName("notice/list"); //이것만 넘기면 DispatcherServlet , ViewResolver에게 해석 맡김
+		mav.setViewName("secure/notice/list"); //이것만 넘기면 DispatcherServlet , ViewResolver에게 해석 맡김
 		return mav;
 	}
 	
-	//상세보기 요청 처리 
+	
+	//상세보기 요청 처리
+	
+	//글쓰기 폼 요청 처리 (write.jsp가 WEB-INF/ 안에 위치해 잇기 때문에, 하위 컨트롤에 의해서만 접근가능
+	//외 외부 브라우저에서 주소값으로 직접 접근 불가능)
+	@RequestMapping(value="/notice/registform", method=RequestMethod.GET)
+	public String getRegistForm() {  //View에 키워드를 채우는 것과 동일
+		return "secure/notice/write";
+	}
+	
 	//글 등록 요청 처리 
+	@RequestMapping(value="/notice/regist", method=RequestMethod.POST)
+	public ModelAndView regist(Notice notice) {
+		
+		String viewName="";
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			noticeService.regist(notice);
+			//성공 뷰결과페이지
+			mav.setViewName("redirect:/admin/notice/list");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//에러페이지
+			//e.printStackTrace();
+			mav.addObject("e", e);
+			mav.setViewName("secure/error/result");
+			log.error("등록실패", e.getMessage() ,e); //개발자 를 위한 것임...
+		}
+		// 클라이언트로 하여금 지정된 url로 재접속 location.href="/admin/notice/list";
+		return mav; 
+	}
+	
 	//글 수정 요청 처리 
 	//글 삭제 요청 처리 
 }
