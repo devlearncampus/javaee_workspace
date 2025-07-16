@@ -2,6 +2,8 @@ package mall.notice.model;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +15,15 @@ import mall.domain.Notice;
 @Slf4j
 @Repository
 public class MybatisNoticeDAO implements NoticeDAO{
-
+	
+	//스프링 컨테이로 하여금 ,자동으로 주입시켜달라!!
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
 	@Override
 	public List selectAll() {
 		log.debug("DAO의 selectAll() 도달");
-		return null;
+		return sqlSessionTemplate.selectList("Notice.selectAll");
 	}
 
 	@Override

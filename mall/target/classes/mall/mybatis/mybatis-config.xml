@@ -17,6 +17,14 @@
 		</environment>
 	</environments>
 	<mappers>
-		<!-- <mapper resource="mall/mybatis/NoticeMapper.xml" />  -->
+		<mapper resource="mall/mybatis/NoticeMapper.xml" />
 	</mappers>
 </configuration>
+
+
+
+
+
+
+
+
