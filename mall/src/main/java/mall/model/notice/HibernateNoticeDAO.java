@@ -1,4 +1,4 @@
-package mall.notice.model;
+package mall.model.notice;
 
 import java.util.List;
 

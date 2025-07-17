@@ -1,5 +1,6 @@
 package mall.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,6 +17,8 @@ public class Notice {
 	private String title;
 	private String writer;
 	private String content;
+	
+	@Column(name = "regdate", insertable = false, updatable = false)
 	private String regdate;
 	private int hit;
 	

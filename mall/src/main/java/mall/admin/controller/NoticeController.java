@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import mall.domain.Notice;
-import mall.notice.model.NoticeService;
+import mall.model.notice.NoticeService;
 
 
 @Slf4j
@@ -68,7 +68,7 @@ public class NoticeController {
 		try {
 			noticeService.regist(notice);
 			//성공 뷰결과페이지
-			mav.setViewName("redirect:/admin/notice/list"); 
+			mav.setViewName("redirect:/admin/notice/list");  // location.href=""; 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			//에러페이지

@@ -7,6 +7,10 @@
 </head>
 <body bgcolor="yellow">
 	에러 발생 
+	<%
+	Exception e=(Exception)request.getAttribute("e"); 
+	out.print(e.getMessage());
+	%>
 	
 </body>
 </html>
