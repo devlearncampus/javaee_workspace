@@ -11,8 +11,9 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="/static/shop/index.html">Home</a></li>
-                            <li><a href="#">Womenâs</a></li>
-                            <li><a href="#">Menâs</a></li>
+                            <%for(TopCategory topcategory : topList){ %>
+                            <li><a href="#"><%=topcategory.getTop_name() %></a></li>
+                            <%}%>
                             <li><a href="/static/shop/shop.html">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
