@@ -39,17 +39,7 @@
     <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
     
     <!-- 톰켓이 지원하는 커넥션풀  -->
-    <Resource  
-	    name="jndi/mysql"
-	    auth="Container" 
-	    driverClassName="com.mysql.cj.jdbc.Driver"
-	    maxIdle="10" 
-	    maxTotal="20" 
-	    maxWaitMillis="-1" 
-	    password="1234" 
-	    type="javax.sql.DataSource" 
-	    url="jdbc:mysql://localhost:3306/spring4" 
-	    username="spring4"/>
+    <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jndi/mysql" password="1234" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/spring4" username="spring4"/>
     
   </GlobalNamingResources>
 
@@ -175,14 +165,9 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       
-      <Context docBase="mall" path="/" reloadable="true" source="org.eclipse.jst.jee.server:mall">
-      	
-      	<ResourceLink 
-      		global="jndi/mysql" 
-      		name="jndi/mysql"
-      		type="javax.sql.DataSource" 
-      	/>
-      	
+      
+      <Context docBase="MallTest" path="/" reloadable="true" source="org.eclipse.jst.jee.server:MallTest">
+      	<ResourceLink name="jndi/mysql" global="jndi/mysql" type="javax.sql.DataSource"/>
       </Context>
       </Host>
     </Engine>
