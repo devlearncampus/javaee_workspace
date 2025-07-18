@@ -53,16 +53,65 @@
             <!-- 상품 등록 폼 시작 -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+                <h3 class="card-title">상품 등록 폼</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form>
                 <div class="card-body">
+                	<!-- 카테고리 영역 시작 -->
+	                  <div class="row">
+	                    <div class="col-sm-6">
+	                      <!-- Select multiple-->
+	                      <div class="form-group">
+	                        <label>상위 카테고리</label>
+	                        <select class="form-control">
+	                          <option>option 1</option>
+	                          <option>option 2</option>
+	                          <option>option 3</option>
+	                          <option>option 4</option>
+	                          <option>option 5</option>
+	                        </select>
+	                      </div>
+	                    </div>
+	                    <div class="col-sm-6">
+	                      <div class="form-group">
+	                        <label>하위 카테고리</label>
+	                        <select class="form-control">
+	                          <option>option 1</option>
+	                          <option>option 2</option>
+	                          <option>option 3</option>
+	                          <option>option 4</option>
+	                          <option>option 5</option>
+	                        </select>
+	                      </div>
+	                    </div>
+	                  </div>
+                	<!-- 카테고리 영역 끝 -->
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="text" class="form-control" name="product_name" placeholder="상품명 입력">
                   </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="product_name" placeholder="브랜드 입력">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="product_name" placeholder="가격 입력">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="product_name" placeholder="할인가 입력">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="product_name" placeholder="간단소개 100자 이하 ">
+                  </div>
+				   <div class="form-group">
+                       <select class="form-control">
+                         <option>색상 선택</option>
+                       </select>
+	              </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="product_name" placeholder="상품명 입력">
+                  </div>
+                  
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
@@ -107,9 +156,6 @@
 </div>
 <!-- ./wrapper -->
 	<%@ include file="../inc/footer_link.jsp" %>
-	<script>
-	  $.widget.bridge('uibutton', $.ui.button)
-	</script>
 </body>
 </html>
 
