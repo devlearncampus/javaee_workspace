@@ -53,7 +53,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/static/admin/index2.html" class="nav-link">
+                <a href="/admin/admin/product/registform" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>상품등록</p>
                 </a>
