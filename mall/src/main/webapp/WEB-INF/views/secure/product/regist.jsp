@@ -78,16 +78,16 @@
                     <input type="text" class="form-control" name="product_name" placeholder="상품명 입력">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="product_name" placeholder="브랜드 입력">
+                    <input type="text" class="form-control" name="brand" placeholder="브랜드 입력">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="product_name" placeholder="가격 입력">
+                    <input type="text" class="form-control" name="price" placeholder="가격 입력">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="product_name" placeholder="할인가 입력">
+                    <input type="text" class="form-control" name="discount" placeholder="할인가 입력">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="product_name" placeholder="간단소개 100자 이하 ">
+                    <input type="text" class="form-control" name="introduce" placeholder="간단소개 100자 이하 ">
                   </div>
 				   <div class="form-group">
                        <select class="form-control">
@@ -102,12 +102,8 @@
 	              </div>
 	              
                   <div class="form-group">
-                    <input type="text" class="form-control" name="product_name" placeholder="상품명 입력">
-                  </div>
-                  
-                  <div class="form-group">
 					<!-- 편집 시작 -->
-			      	<textarea id="summernote"></textarea>
+			      	<textarea id="summernote" name="detail"></textarea>
 					<!-- 편집기 끝-->
                   </div>
                   
@@ -130,7 +126,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-primary">Submit</button>
                 </div>
               </form>
             </div>

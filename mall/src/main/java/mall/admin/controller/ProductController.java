@@ -1,14 +1,12 @@
 package mall.admin.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
+import mall.domain.Product;
 import mall.model.category.TopCategoryService;
 
 @Slf4j
@@ -26,7 +24,32 @@ public class ProductController {
 		return "secure/product/regist";
 	}
 	
+	//상품 등록 요청을 처리 
+	@PostMapping("/admin/product/regist")
+	public String regist(Product product) {
+		//모델 객체는 table을 반영한 객체이므로, 컨트롤러 영역에서 바로 파라미터를 받는 용도도 사용해서는 안됨
+		//왜? 데이터베이스 컬럼명이 노출되기 때문에, 
+		//해결책은? 클라이언트의 파라미터를 받는 용도의 객체를 별도로 둔다(DTO=Data Transfer Object)
+		//DTO에서 Model 객체로 옮겨야 함..
+		
+		log.debug("product = "+product);
+		
+		//3단계: 일 시키기
+		
+		
+		//4단계: DML은 저장할게 없다
+		return "redirect:/admin/admin/product/list";
+	}
 }
+
+
+
+
+
+
+
+
+
 
 
 
