@@ -1,5 +1,7 @@
 package mall.spring.config;
 
+import java.util.List;
+
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
@@ -12,6 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -19,6 +23,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
@@ -29,7 +34,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = {"mall.admin.controller"})
 //@Controller, @Service, @Repository, @Component
-public class AdminWebConfig {
+public class AdminWebConfig extends WebMvcConfigurerAdapter{
 
 	/*하위 컨트롤러가 3,4단계를 수행한 후, DispatcherServlet 에게 정확한 파일명을 알려주는게 아니라
 	 * 파일의 일부 단서만 반환한다(ModelAndView에 심어서), 따라서 이 객체를 넘겨받은 DispatcherServlet
@@ -39,12 +44,6 @@ public class AdminWebConfig {
 	 * 
 	 * 예시)  하위컨트롤러가    notice/list 를 심어서 보내면 -- >  /WEB-INF/views/   notice/list   .jsp
 	 * */	
-	
-	/*
-	 * 
-	 * 
-	 * 
-	 * */
 	@Bean // <bean class="InternalResourceViewResolver" id="viewResolver"> </bean>
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -53,7 +52,12 @@ public class AdminWebConfig {
 		return resolver;
 	}
 	
-	
+	//어노테이션으로 하지 않을 경우,xml로 설정해야 함..
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+		//pom.xml에 추가한 jackson-bind 라이브리의 객체 추가
+		converters.add(new MappingJackson2HttpMessageConverter());
+	}
 }
 
 

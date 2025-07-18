@@ -21,17 +21,8 @@ public class ProductController {
 	
 	// localhost:8888/admin/admin/product/registform
 	@RequestMapping(value="/admin/product/registform")
-	public String registform(Model model) {
+	public String registform() {
 		//상품 등록페이지를 보게되는 초기에, 상위 카테고리가채워져 있어야 함
-		
-		log.debug("컨트롤러 호출 ");
-		//3단계: 일 시키기 
-		List topList=topCategoryService.selectAll();
-		log.debug("topList is "+topList);
-		
-		//4단계: 결과 저장 
-		model.addAttribute("topList", topList);
-		
 		return "secure/product/regist";
 	}
 	

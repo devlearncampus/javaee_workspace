@@ -1,18 +1,11 @@
-<%@page import="mall.domain.TopCategory"%>
-<%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%
-	List<TopCategory> topList=(List)request.getAttribute("topList");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Dashboard</title>
-	
 	<%@ include file="../inc/head_link.jsp" %>
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -70,27 +63,13 @@
 	                      <!-- Select multiple-->
 	                      <div class="form-group">
 	                        <label>상위 카테고리</label>
-	                        <select class="form-control">
-	                        
-	                          <option value="0">카테고리 선택</option>
-	                          
-	                          <%for(TopCategory topcategory  : topList){ %>
-	                          <option value="<%=topcategory.getTopcategory_id() %>"><%=topcategory.getTop_name() %></option>
-	                          <%} %>
-
-	                        </select>
+	                        <select class="form-control" id="topcategory"></select>
 	                      </div>
 	                    </div>
 	                    <div class="col-sm-6">
 	                      <div class="form-group">
 	                        <label>하위 카테고리</label>
-	                        <select class="form-control">
-	                          <option>option 1</option>
-	                          <option>option 2</option>
-	                          <option>option 3</option>
-	                          <option>option 4</option>
-	                          <option>option 5</option>
-	                        </select>
+	                        <select class="form-control" id="subcategory"></select>
 	                      </div>
 	                    </div>
 	                  </div>
@@ -172,12 +151,55 @@
 <!-- ./wrapper -->
 	<%@ include file="../inc/footer_link.jsp" %>
 	<script>
-	  $(()=>{
-		    $('#summernote').summernote({
-				height:200,
-				placeholder:"상품 상세 설명을 채우세요"
-		    });
-	  });
+	function printCategory(list){
+		let tag="<option value='0'>카테고리 선택</option>";
+		
+		for(let i=0;i<list.length;i++){
+			tag+="<option value='"+list[i].topcategory_id+"'>"+list[i].top_name+"</option>";
+		}
+		
+		$("#topcategory").html(tag);  // innerHTML=태그 동일
+	}
+	
+	//비동기 방식으로 서버에 요청을 시도하여, 데이터 가져오기 
+	function getTopCategory(){
+		$.ajax({
+			url:"/admin/admin/topcategory/list",
+			type:"get",
+			success:function(result, status, xhr){ //200번대의 성공 응답 시, 이 함수 실행
+				console.log("서버로부터 받은 결과는 ", result);
+				//화면에 출력하기 
+				printCategory(result);
+			},
+			error:function(xhr, status, err){
+			}
+		});
+	}
+	
+	function getSubCategory(topcategory_id){
+		$.ajax({
+			url :"/admin/admin/subcategory/list?topcategory_id="+topcategory_id,
+			type:"get",
+			success:function(result, status, xhr){
+				console.log(result);
+			}
+		});
+	}
+	
+	$(()=>{
+	   $('#summernote').summernote({
+		height:200,
+		placeholder:"상품 상세 설명을 채우세요"
+	   });
+	   
+	   //상위 카테고리 가져오기 
+	   getTopCategory();
+	   
+	   //상위 카테고리의 값을 변경시, 하위 카테고리 가져오기 
+	   $("#topcategory").change(function(){
+			getSubCategory();
+		});
+	});
 	</script>
 	
 </body>
