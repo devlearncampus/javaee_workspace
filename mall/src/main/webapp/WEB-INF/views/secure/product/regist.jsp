@@ -90,13 +90,13 @@
                     <input type="text" class="form-control" name="introduce" placeholder="간단소개 100자 이하 ">
                   </div>
 				   <div class="form-group">
-                       <select class="form-control">
+                       <select class="form-control" id="color">
                          <option>색상 선택</option>
                        </select>
 	              </div>
 				  
 				  <div class="form-group">
-                       <select class="form-control">
+                       <select class="form-control" id="size">
                          <option>사이즈 선택</option>
                        </select>
 	              </div>
@@ -154,6 +154,10 @@
 				tag+="<option value='"+list[i].topcategory_id+"'>"+list[i].top_name+"</option>";
 			}else if(obj=="#subcategory"){
 				tag+="<option value='"+list[i].subcategory_id+"'>"+list[i].sub_name+"</option>";
+			}else if(obj=="#color"){
+				tag+="<option value='"+list[i].color_id+"'>"+list[i].color_name+"</option>";
+			}else if(obj=="#size"){
+				tag+="<option value='"+list[i].size_id+"'>"+list[i].size_name+"</option>";
 			}
 		}
 		
@@ -187,11 +191,23 @@
 	}
 	
 	function getColorList(){
-
+		$.ajax({
+			url:"/admin/admin/color/list",
+			type:"get",
+			success:function(result, status, xhr){
+				printCategory("#color", result);
+			}
+		});
 	}
 	
 	function getSizeList(){
-
+		$.ajax({
+			url:"/admin/admin/size/list",
+			type:"get",
+			success:function(result, status, xhr){
+				printCategory("#size", result);
+			}
+		});
 	}
 	
 	$(()=>{

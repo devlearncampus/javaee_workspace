@@ -10,9 +10,7 @@ import mall.domain.TopCategory;
 
 @Service
 public class TopCategoryServiceImpl implements TopCategoryService{
-
 	//DAO를 느슨하게 보유
-	@Qualifier("hibernateTopCategoryDAO")
 	@Autowired
 	private TopCategoryDAO topCategoryDAO;
 	
