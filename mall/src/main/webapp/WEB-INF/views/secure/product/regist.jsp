@@ -151,14 +151,18 @@
 <!-- ./wrapper -->
 	<%@ include file="../inc/footer_link.jsp" %>
 	<script>
-	function printCategory(list){
+	function printCategory(obj, list){
 		let tag="<option value='0'>카테고리 선택</option>";
 		
 		for(let i=0;i<list.length;i++){
-			tag+="<option value='"+list[i].topcategory_id+"'>"+list[i].top_name+"</option>";
+			if(obj=="#topcategory"){
+				tag+="<option value='"+list[i].topcategory_id+"'>"+list[i].top_name+"</option>";
+			}else if(obj=="#subcategory"){
+				tag+="<option value='"+list[i].subcategory_id+"'>"+list[i].sub_name+"</option>";
+			}
 		}
 		
-		$("#topcategory").html(tag);  // innerHTML=태그 동일
+		$(obj).html(tag);  // innerHTML=태그 동일
 	}
 	
 	//비동기 방식으로 서버에 요청을 시도하여, 데이터 가져오기 
@@ -169,7 +173,7 @@
 			success:function(result, status, xhr){ //200번대의 성공 응답 시, 이 함수 실행
 				console.log("서버로부터 받은 결과는 ", result);
 				//화면에 출력하기 
-				printCategory(result);
+				printCategory("#topcategory",result);
 			},
 			error:function(xhr, status, err){
 			}
@@ -182,6 +186,7 @@
 			type:"get",
 			success:function(result, status, xhr){
 				console.log(result);
+				printCategory("#subcategory",result);
 			}
 		});
 	}
@@ -197,7 +202,7 @@
 	   
 	   //상위 카테고리의 값을 변경시, 하위 카테고리 가져오기 
 	   $("#topcategory").change(function(){
-			getSubCategory();
+			getSubCategory($(this).val());
 		});
 	});
 	</script>
