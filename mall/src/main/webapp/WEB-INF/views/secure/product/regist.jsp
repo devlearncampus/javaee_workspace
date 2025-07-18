@@ -69,7 +69,7 @@
 	                    <div class="col-sm-6">
 	                      <div class="form-group">
 	                        <label>하위 카테고리</label>
-	                        <select class="form-control" id="subcategory"></select>
+	                        <select class="form-control" name="subcategory.subcategory_id" id="subcategory"></select>
 	                      </div>
 	                    </div>
 	                  </div>
@@ -109,24 +109,23 @@
                   
                   <div class="form-group">
                     <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                    
+                      <div class="custom-file">                      
+                        <input type="file" class="custom-file-input" name="photo">
                         <label class="custom-file-label" for="exampleInputFile">상품 이미지 선택</label>
                       </div>
+                      
                       <div class="input-group-append">
                         <span class="input-group-text">Upload</span>
                       </div>
                     </div>
                   </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
+                
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="button" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-secondary" id="bt_regist">Submit</button>
                 </div>
               </form>
             </div>
@@ -196,10 +195,24 @@
 	   //상위 카테고리 가져오기 
 	   getTopCategory();
 	   
+	   function regist(){
+			$("form").attr({
+				action:"/admin/admin/product/regist",
+				method:"post",
+				enctype:"multipart/form-data"
+			});
+			$("form").submit();
+	   }
+	   
 	   //상위 카테고리의 값을 변경시, 하위 카테고리 가져오기 
 	   $("#topcategory").change(function(){
 			getSubCategory($(this).val());
 		});
+	   
+	   //등록버튼 이벤트 연결 
+	   $("#bt_regist").click(()=>{
+			regist();
+	   });
 	});
 	</script>
 	

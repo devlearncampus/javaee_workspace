@@ -1,9 +1,16 @@
 package mall.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import mall.domain.Product;
@@ -26,16 +33,48 @@ public class ProductController {
 	
 	//상품 등록 요청을 처리 
 	@PostMapping("/admin/product/regist")
-	public String regist(Product product) {
+	public String regist(Product product, MultipartFile photo, HttpServletRequest request) {
+		//MultipartFile 변수와 html 이름이 동일하면 매핑됨 
+		
 		//모델 객체는 table을 반영한 객체이므로, 컨트롤러 영역에서 바로 파라미터를 받는 용도도 사용해서는 안됨
 		//왜? 데이터베이스 컬럼명이 노출되기 때문에, 
 		//해결책은? 클라이언트의 파라미터를 받는 용도의 객체를 별도로 둔다(DTO=Data Transfer Object)
 		//DTO에서 Model 객체로 옮겨야 함..
 		
 		log.debug("product = "+product);
+		log.debug("photo = "+photo);
 		
 		//3단계: 일 시키기
+		//메모리에 올라온 이미지정보를 디스크에 저장
+		//파일의 경로를 개발자가 정해놓지 말고, 애플리케이션으로부터 경로를 동적으로 얻어오는 방법 
+		ServletContext context=request.getServletContext(); //jsp applicatio 내장 객체 
+																					 //애플리케이션과 생명을 같이함
+		String realPath = context.getRealPath("/data");
+		log.debug("realPath is "+realPath);
 		
+		//업로드된 파일 확장자
+		String filename=photo.getOriginalFilename();
+		log.debug("업로드된 원본파일 "+filename);
+		
+		String ext= filename.substring(filename.lastIndexOf(".")+1, filename.length());
+		log.debug("확장자 "+ext);
+		
+		//파일명을  유일성을 보장하기 위한 방법은 상당히 많다 
+		//해시값, 현재날짜, db pk 값 
+		long time = System.currentTimeMillis();
+		
+		String newName= time+"."+ext;
+		
+		File file = new File(realPath, newName);//저장될 파일 
+		
+		try {
+			photo.transferTo(file);
+			log.debug(file.getAbsolutePath());//업로드된 결과 디렉토리 확인차 
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		//4단계: DML은 저장할게 없다
 		return "redirect:/admin/admin/product/list";
