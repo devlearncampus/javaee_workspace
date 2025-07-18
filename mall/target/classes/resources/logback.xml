@@ -15,11 +15,6 @@
 		</encoder>
 	</appender>
 	
-    <logger name="org.hibernate" level="INFO"/>
-    <logger name="org.hibernate.SQL" level="OFF"/>
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="OFF"/>
-    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="OFF"/>
-    	
 	<root level="debug">
 		<appender-ref ref="console"/>
 	</root>

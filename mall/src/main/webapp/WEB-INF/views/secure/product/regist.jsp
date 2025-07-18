@@ -127,44 +127,11 @@
                   </div>
                   
                   <div class="form-group">
-                  
-		<!-- 편집 시작 -->
-		<div class="row">
-		  <div class="col-md-12">
-		    <div class="card card-outline card-info">
-		      <div class="card-header">
-		        <h3 class="card-title">
-		          CodeMirror
-		        </h3>
-		      </div>
-		      <!-- /.card-header -->
-		            <div class="card-body p-0">
-		              <textarea id="codeMirrorDemo" class="p-3">
-		<div class="info-box bg-gradient-info">
-		  <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-		  <div class="info-box-content">
-		    <span class="info-box-text">Bookmarks</span>
-		    <span class="info-box-number">41,410</span>
-		    <div class="progress">
-		      <div class="progress-bar" style="width: 70%"></div>
-		    </div>
-		    <span class="progress-description">
-		      70% Increase in 30 Days
-		    </span>
-		  </div>
-		</div>
-		              </textarea>
-		            </div>
-		            <div class="card-footer">
-		              Visit <a href="https://codemirror.net/">CodeMirror</a> documentation for more examples and information about the plugin.
-		            </div>
-		          </div>
-		        </div>
-		        <!-- /.col-->
-		</div>
-		<!-- 편집기 끝-->
-                  
+					<!-- 편집 시작 -->
+			      	<textarea id="summernote"></textarea>
+					<!-- 편집기 끝-->
                   </div>
+                  
                   <div class="form-group">
                     <div class="input-group">
                       <div class="custom-file">
@@ -204,27 +171,13 @@
 </div>
 <!-- ./wrapper -->
 	<%@ include file="../inc/footer_link.jsp" %>
-
-	<!-- Summernote -->
-	<script src="/static/admin/plugins/summernote/summernote-bs4.min.js"></script>
-	
-	<!-- CodeMirror -->
-	<script src="/static/admin/plugins/codemirror/codemirror.js"></script>
-	<script src="/static/admin/plugins/codemirror/mode/css/css.js"></script>
-	<script src="/static/admin/plugins/codemirror/mode/xml/xml.js"></script>
-	<script src="/static/admin/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
-	
 	<script>
-	  $(function () {
-	    // Summernote
-	    $('#summernote').summernote()
-	
-	    // CodeMirror
-	    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-	      mode: "htmlmixed",
-	      theme: "monokai"
-	    });
-	  })
+	  $(()=>{
+		    $('#summernote').summernote({
+				height:200,
+				placeholder:"상품 상세 설명을 채우세요"
+		    });
+	  });
 	</script>
 	
 </body>
