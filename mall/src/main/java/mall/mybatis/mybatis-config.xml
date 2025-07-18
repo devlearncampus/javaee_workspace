@@ -5,9 +5,12 @@
 <configuration>
 	
 	<typeAliases>
-		<typeAlias type="mall.domain.Notice" alias="Notice"/>
-		<typeAlias type="mall.domain.TopCategory" alias="TopCategory"/>
-		<typeAlias type="mall.domain.SubCategory" alias="SubCategory"/>
+		<typeAlias type="mall.domain.Notice" 			alias="Notice"/>
+		<typeAlias type="mall.domain.TopCategory" 	alias="TopCategory"/>
+		<typeAlias type="mall.domain.SubCategory" 	alias="SubCategory"/>
+		<typeAlias type="mall.domain.Product" 			alias="Product"/>
+		<typeAlias type="mall.domain.Color" 			alias="Color"/>
+		<typeAlias type="mall.domain.Size" 				alias="Size"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -18,10 +21,14 @@
 			</dataSource>
 		</environment>
 	</environments>
+	
 	<mappers>
 		<mapper resource="mall/mybatis/NoticeMapper.xml" />
 		<mapper resource="mall/mybatis/TopCategoryMapper.xml" />
 		<mapper resource="mall/mybatis/SubCategoryMapper.xml" />
+		<mapper resource="mall/mybatis/ProductMapper.xml" />
+		<mapper resource="mall/mybatis/ColorMapper.xml" />
+		<mapper resource="mall/mybatis/SizeMapper.xml" />
 	</mappers>
 </configuration>
 

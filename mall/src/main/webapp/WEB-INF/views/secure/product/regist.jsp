@@ -186,14 +186,22 @@
 		});
 	}
 	
+	function getColorList(){
+
+	}
+	
+	function getSizeList(){
+
+	}
+	
 	$(()=>{
 	   $('#summernote').summernote({
 		height:200,
 		placeholder:"상품 상세 설명을 채우세요"
 	   });
-	   
-	   //상위 카테고리 가져오기 
-	   getTopCategory();
+	   getTopCategory(); //상위 카테고리 가져오기 
+	   getColorList(); //색상 목록 가져오기 
+	   getSizeList(); //사이즈 목록 가져오기 
 	   
 	   function regist(){
 			$("form").attr({
