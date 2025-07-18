@@ -1,4 +1,9 @@
+<%@page import="mall.domain.TopCategory"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%
+	List<TopCategory> topList=(List)request.getAttribute("topList");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,11 +71,13 @@
 	                      <div class="form-group">
 	                        <label>상위 카테고리</label>
 	                        <select class="form-control">
-	                          <option>option 1</option>
-	                          <option>option 2</option>
-	                          <option>option 3</option>
-	                          <option>option 4</option>
-	                          <option>option 5</option>
+	                        
+	                          <option value="0">카테고리 선택</option>
+	                          
+	                          <%for(TopCategory topcategory  : topList){ %>
+	                          <option value="<%=topcategory.getTopcategory_id() %>"><%=topcategory.getTop_name() %></option>
+	                          <%} %>
+
 	                        </select>
 	                      </div>
 	                    </div>
@@ -108,20 +115,61 @@
                          <option>색상 선택</option>
                        </select>
 	              </div>
+				  
+				  <div class="form-group">
+                       <select class="form-control">
+                         <option>사이즈 선택</option>
+                       </select>
+	              </div>
+	              
                   <div class="form-group">
                     <input type="text" class="form-control" name="product_name" placeholder="상품명 입력">
                   </div>
                   
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  
+		<!-- 편집 시작 -->
+		<div class="row">
+		  <div class="col-md-12">
+		    <div class="card card-outline card-info">
+		      <div class="card-header">
+		        <h3 class="card-title">
+		          CodeMirror
+		        </h3>
+		      </div>
+		      <!-- /.card-header -->
+		            <div class="card-body p-0">
+		              <textarea id="codeMirrorDemo" class="p-3">
+		<div class="info-box bg-gradient-info">
+		  <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+		  <div class="info-box-content">
+		    <span class="info-box-text">Bookmarks</span>
+		    <span class="info-box-number">41,410</span>
+		    <div class="progress">
+		      <div class="progress-bar" style="width: 70%"></div>
+		    </div>
+		    <span class="progress-description">
+		      70% Increase in 30 Days
+		    </span>
+		  </div>
+		</div>
+		              </textarea>
+		            </div>
+		            <div class="card-footer">
+		              Visit <a href="https://codemirror.net/">CodeMirror</a> documentation for more examples and information about the plugin.
+		            </div>
+		          </div>
+		        </div>
+		        <!-- /.col-->
+		</div>
+		<!-- 편집기 끝-->
+                  
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        <label class="custom-file-label" for="exampleInputFile">상품 이미지 선택</label>
                       </div>
                       <div class="input-group-append">
                         <span class="input-group-text">Upload</span>
@@ -156,6 +204,29 @@
 </div>
 <!-- ./wrapper -->
 	<%@ include file="../inc/footer_link.jsp" %>
+
+	<!-- Summernote -->
+	<script src="/static/admin/plugins/summernote/summernote-bs4.min.js"></script>
+	
+	<!-- CodeMirror -->
+	<script src="/static/admin/plugins/codemirror/codemirror.js"></script>
+	<script src="/static/admin/plugins/codemirror/mode/css/css.js"></script>
+	<script src="/static/admin/plugins/codemirror/mode/xml/xml.js"></script>
+	<script src="/static/admin/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+	
+	<script>
+	  $(function () {
+	    // Summernote
+	    $('#summernote').summernote()
+	
+	    // CodeMirror
+	    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+	      mode: "htmlmixed",
+	      theme: "monokai"
+	    });
+	  })
+	</script>
+	
 </body>
 </html>
 
