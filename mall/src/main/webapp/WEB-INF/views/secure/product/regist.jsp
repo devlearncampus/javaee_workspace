@@ -120,7 +120,7 @@
                       </div>
                     </div>
                     
-                    <div id="preview" style="width:100%;background:yellow;">
+                    <div id="preview" style="width:100%;">
                     	미리보기
                     </div>
                     
@@ -150,6 +150,7 @@
 </div>
 <!-- ./wrapper -->
 	<%@ include file="../inc/footer_link.jsp" %>
+	<script src="/static/admin/custom/ProductImg.js"></script>
 	<script>
 	function printCategory(obj, list){
 		let tag="<option value='0'>카테고리 선택</option>";
@@ -254,14 +255,11 @@
 				
 				reader.onload=function(e){ //파일을 스트림으로 읽어들인 정보가 e에 들어있음 
 					console.log("읽은 결과 ", e);		
-					//e.target.result 에 이미지 정보가 들어있음 img src 에 속성에 대입할 예정 
-					let img=document.createElement("img"); //동적으로 이미지 객체 생성 <img> 와 동일 
-					img.src=e.target.result;//이미지 정보 대입 
-					img.style.width=100+"px";
-					document.getElementById("preview").appendChild(img);					
+					
+					//개발자 정의 클래스 인스턴스 생성 container, src, width, height 
+					let productImg = new ProductImg(document.getElementById("preview"), e.target.result, 100,100);
 				}				
 				reader.readAsDataURL(files[i]); //지정한 파일을 읽기
-				
 			}
 			
 	   });
