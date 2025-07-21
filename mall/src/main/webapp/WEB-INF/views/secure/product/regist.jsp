@@ -111,7 +111,7 @@
                     <div class="input-group">
                     
                       <div class="custom-file">                      
-                        <input type="file" class="custom-file-input" name="photo">
+                        <input type="file" class="custom-file-input" name="photo" id="photo" multiple="multiple">
                         <label class="custom-file-label" for="exampleInputFile">상품 이미지 선택</label>
                       </div>
                       
@@ -119,6 +119,11 @@
                         <span class="input-group-text">Upload</span>
                       </div>
                     </div>
+                    
+                    <div id="preview" style="width:100%;background:yellow;">
+                    	미리보기
+                    </div>
+                    
                   </div>
                 
                 </div>
@@ -233,8 +238,37 @@
 			getSubCategory($(this).val());
 		});
 	   
+	   
+	   //파일 컴포넌트의 값 변경 시 이벤트 연결 
+	   $("#photo").change(function(e){
+			console.log(e);
+			//e.target.files 안에는 브라우저가 읽어들인, 파일의 정보가 배열유사 객체인 FileList에 담겨져 있다.
+			
+			let files=e.target.files;//배열 유사 객체 얻기
+			
+			//첨부된 파일 수 만큼 반복
+			for(let i=0;i<files.length;i++){
+				
+				//파일을 읽기위한 스트림 객체 생성 
+				const reader = new FileReader();
+				
+				reader.onload=function(e){ //파일을 스트림으로 읽어들인 정보가 e에 들어있음 
+					console.log("읽은 결과 ", e);		
+					//e.target.result 에 이미지 정보가 들어있음 img src 에 속성에 대입할 예정 
+					let img=document.createElement("img"); //동적으로 이미지 객체 생성 <img> 와 동일 
+					img.src=e.target.result;//이미지 정보 대입 
+					img.style.width=100+"px";
+					document.getElementById("preview").appendChild(img);					
+				}				
+				reader.readAsDataURL(files[i]); //지정한 파일을 읽기
+				
+			}
+			
+	   });
+	   
 	   //등록버튼 이벤트 연결 
 	   $("#bt_regist").click(()=>{
+			this
 			regist();
 	   });
 	});
