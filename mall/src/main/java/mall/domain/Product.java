@@ -13,7 +13,7 @@ public class Product {
 	private int discount;
 	private String introduce;
 	private String detail;
-	private MultipartFile photo;
+	//private MultipartFile[] photo;
 	private SubCategory subcategory;
 }
 

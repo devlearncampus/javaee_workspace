@@ -215,7 +215,23 @@
 			}
 		});
 	}
+
+	//크롬브라우저에서 지원하는 e.target.files 유사 배열은 읽기전용 이라서, 
+	//개발자가 쓰기 가 안되므로, 배열을 하나 선언하여,담아서 처리
+	//주의) 아래의 배열은, 개발자가 정의한 배열일 뿐이지, form태그가 전송할 컴포넌트는 아니므로, 
+	//submit 시, selectedFile에 들어있는 파일을 전송할 수는 없다!!!
+	//해결책? form태그에 인식을 시켜야 한다.. (javascript로 프로그래밍적 formData 객체를 사용해야 함)
+	let selectedFile=[];
 	
+	function regist(){
+		$("form").attr({
+			action:"/admin/admin/product/regist",
+			method:"post",
+			enctype:"multipart/form-data"
+		});
+		$("form").submit();
+	}
+	   
 	$(()=>{
 	   $('#summernote').summernote({
 		height:200,
@@ -225,14 +241,7 @@
 	   getColorList(); //색상 목록 가져오기 
 	   getSizeList(); //사이즈 목록 가져오기 
 	   
-	   function regist(){
-			$("form").attr({
-				action:"/admin/admin/product/regist",
-				method:"post",
-				enctype:"multipart/form-data"
-			});
-			$("form").submit();
-	   }
+
 	   
 	   //상위 카테고리의 값을 변경시, 하위 카테고리 가져오기 
 	   $("#topcategory").change(function(){
@@ -249,6 +258,7 @@
 			
 			//첨부된 파일 수 만큼 반복
 			for(let i=0;i<files.length;i++){
+				selectedFile[i]=files[i]; //읽기 전용에 들어있었던 각 file들을,우리만의 배열로 옮기자 
 				
 				//파일을 읽기위한 스트림 객체 생성 
 				const reader = new FileReader();
@@ -257,16 +267,14 @@
 					console.log("읽은 결과 ", e);		
 					
 					//개발자 정의 클래스 인스턴스 생성 container, src, width, height 
-					let productImg = new ProductImg(document.getElementById("preview"), e.target.result, 100,100);
+					let productImg = new ProductImg(document.getElementById("preview"), files[i]  ,e.target.result, 100,100);
 				}				
 				reader.readAsDataURL(files[i]); //지정한 파일을 읽기
 			}
-			
 	   });
 	   
 	   //등록버튼 이벤트 연결 
-	   $("#bt_regist").click(()=>{
-			this
+	   $("#bt_regist").click(()=>{		
 			regist();
 	   });
 	});

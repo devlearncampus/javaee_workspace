@@ -33,8 +33,9 @@ public class ProductController {
 	
 	//상품 등록 요청을 처리 
 	@PostMapping("/admin/product/regist")
-	public String regist(Product product, HttpServletRequest request) {
+	public String regist(Product product, MultipartFile[] photo, HttpServletRequest request) {
 		//MultipartFile 변수와 html 이름이 동일하면 매핑됨 
+		log.debug("업로드 한 파일의 수는 "+photo.length);
 		
 		//모델 객체는 table을 반영한 객체이므로, 컨트롤러 영역에서 바로 파라미터를 받는 용도도 사용해서는 안됨
 		//왜? 데이터베이스 컬럼명이 노출되기 때문에, 
@@ -43,9 +44,9 @@ public class ProductController {
 		
 		//log.debug("product = "+product);
 		//log.debug("photo = "+photo);
-		ServletContext context=request.getServletContext(); //jsp applicatio 내장 객체 
-		String realPath = context.getRealPath("/data");
-		log.debug("realPath is "+realPath);
+		//ServletContext context=request.getServletContext(); //jsp applicatio 내장 객체 
+		//String realPath = context.getRealPath("/data");
+		//log.debug("realPath is "+realPath);
 		
 		//4단계: DML은 저장할게 없다
 		return "redirect:/admin/admin/product/list";
