@@ -46,41 +46,6 @@ public class ProductController {
 	@PostMapping("/admin/product/regist")
 	@ResponseBody
 	public String regist(Product product, int[] color, int[] size,   HttpServletRequest request) {
-		//MultipartFile 변수와 html 이름이 동일하면 매핑됨 
-		MultipartFile[] photo=product.getPhoto();
-		log.debug("업로드 한 파일의 수는 "+photo.length);
-		
-		try {
-			for(int i=0;i<photo.length;i++) {
-				//확장자 구하기 (원본 업로드 이미지 정보 추츨)
-				log.debug("원본 파일명은 "+photo[i].getOriginalFilename());
-				String  ori=photo[i].getOriginalFilename();
-				
-				String ext =ori.substring(ori.lastIndexOf(".")+1, ori.length());
-				
-				//개발자가 원하는 파일명 생성하기 
-				try {
-					Thread.sleep(10); //연산 속도가 너무 빠르면, 파일명이 중복될 수 있으므로..일부러 지연.. 
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				long time=System.currentTimeMillis(); //23758297829
-				String filename=time+"."+ext;
-				
-				//realPath를 사용하려면, 앱의 전반적인 전역적 정보를 가진 객체인 ServletContext가 필요함 
-				ServletContext context=request.getServletContext();
-				String savePath=context.getRealPath("/data");
-				
-				File file = new File(savePath+File.separator+filename);
-				log.debug("업로드된 이미지가 생성된 경로는 "+savePath);
-				
-				photo[i].transferTo(file); //메모리상의 파일 정보가, 실제 디스크상으로 존재하게 되는 시점!!
-			}
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		
 		//Product 객체의 멤버변수로 직접 html 과 매핑이 될 수 없는 경우엔, 우회하면 된다.. 
@@ -120,7 +85,9 @@ public class ProductController {
 		//해결책은? 클라이언트의 파라미터를 받는 용도의 객체를 별도로 둔다(DTO=Data Transfer Object)
 		//DTO에서 Model 객체로 옮겨야 함..
 		
-		productService.regist(product);
+		String savePath = request.getServletContext().getRealPath("/data");
+		
+		productService.regist(product, savePath);
 		
 		//log.debug("product = "+product);
 		//log.debug("photo = "+photo);
