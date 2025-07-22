@@ -12,10 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.extern.slf4j.Slf4j;
 import mall.domain.Product;
 import mall.model.category.TopCategoryService;
+import mall.model.product.ProductService;
 
 @Slf4j
 @Controller
 public class ProductController {
+	
+	@Autowired
+	private ProductService productService;
 	
 	//서비스 에게 일시킴 (느슨하게 보유, 즉 결합도를 낮추어서 보유,따라서 인터페이스로 보유)
 	@Autowired
@@ -39,6 +43,8 @@ public class ProductController {
 		//왜? 데이터베이스 컬럼명이 노출되기 때문에, 
 		//해결책은? 클라이언트의 파라미터를 받는 용도의 객체를 별도로 둔다(DTO=Data Transfer Object)
 		//DTO에서 Model 객체로 옮겨야 함..
+		
+		productService.regist(product);
 		
 		//log.debug("product = "+product);
 		//log.debug("photo = "+photo);

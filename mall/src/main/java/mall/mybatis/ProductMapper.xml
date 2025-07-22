@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Product">
 
+	
+	<insert id="insert">
+		insert into product(product_name, brand, price, discount, introduce,detail, subcategory_id)
+		values(#{product_name}, #{brand}, #{price}, #{discount}, #{introduce},#{detail}, #{subcategory.subcategory_id})
+		
+		<!-- insert 시키자 마자, 현재 세션에서 일으킨 pk의 최대값  -->
+		<selectKey keyColumn="product_id" keyProperty="product_id" resultType="int" order="AFTER">
+			select last_insert_id() as product_id
+		</selectKey>
+	</insert>
+
 </mapper>
 
 
