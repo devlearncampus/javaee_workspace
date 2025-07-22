@@ -90,13 +90,13 @@
                     <input type="text" class="form-control" name="introduce" placeholder="간단소개 100자 이하 ">
                   </div>
 				   <div class="form-group">
-                       <select class="form-control" id="color">
-                         <option>색상 선택</option>
+                       <select class="form-control" name="color" id="color" multiple="multiple">
+                         <option value="1">ReD</option>
                        </select>
 	              </div>
 				  
 				  <div class="form-group">
-                       <select class="form-control" id="size">
+                       <select class="form-control" name="size" id="size" multiple="multiple">
                          <option>사이즈 선택</option>
                        </select>
 	              </div>
@@ -201,6 +201,9 @@
 			url:"/admin/admin/color/list",
 			type:"get",
 			success:function(result, status, xhr){
+				
+				console.log("색상은 ",result);
+				
 				printCategory("#color", result);
 			}
 		});
@@ -266,8 +269,6 @@
 	   getTopCategory(); //상위 카테고리 가져오기 
 	   getColorList(); //색상 목록 가져오기 
 	   getSizeList(); //사이즈 목록 가져오기 
-	   
-
 	   
 	   //상위 카테고리의 값을 변경시, 하위 카테고리 가져오기 
 	   $("#topcategory").change(function(){

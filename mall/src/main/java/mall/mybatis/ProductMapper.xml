@@ -3,7 +3,7 @@
 <mapper namespace="Product">
 
 	
-	<insert id="insert">
+	<insert id="insert" parameterType="Product">
 		insert into product(product_name, brand, price, discount, introduce,detail, subcategory_id)
 		values(#{product_name}, #{brand}, #{price}, #{discount}, #{introduce},#{detail}, #{subcategory.subcategory_id})
 		
