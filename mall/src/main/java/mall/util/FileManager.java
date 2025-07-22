@@ -1,12 +1,15 @@
 package mall.util;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import mall.domain.Product;
+import mall.domain.ProductImg;
 import mall.exception.UploadException;
 
 //이 객체의 존재가 없다면, 컨트롤러가 '업로드' 라는 모델 영역의 업무를 수행하게 되므로
@@ -20,6 +23,8 @@ public class FileManager{
 		//MultipartFile 변수와 html 이름이 동일하면 매핑됨 
 		MultipartFile[] photo=product.getPhoto();
 		log.debug("업로드 한 파일의 수는 "+photo.length);
+		
+		List imgList = new ArrayList();
 		
 		try {
 			for(int i=0;i<photo.length;i++) {
@@ -37,6 +42,12 @@ public class FileManager{
 				}
 				long time=System.currentTimeMillis(); //23758297829
 				String filename=time+"."+ext;
+				
+				//생성한 파일명을 DB 저장하기 위해 Product 의 imgList 에 보관해놓자
+				ProductImg productImg = new ProductImg();
+				productImg.setFilename(filename);//이미지명 저장
+				imgList.add(productImg);
+				product.setImgList(imgList); //리스트 대입 
 				
 				//realPath를 사용하려면, 앱의 전반적인 전역적 정보를 가진 객체인 ServletContext가 필요함 
 				

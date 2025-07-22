@@ -9,10 +9,11 @@
 		<typeAlias type="mall.domain.TopCategory" 		alias="TopCategory"/>
 		<typeAlias type="mall.domain.SubCategory" 		alias="SubCategory"/>
 		<typeAlias type="mall.domain.Product" 				alias="Product"/>
-		<typeAlias type="mall.domain.Color" 					alias="Color"/>
+		<typeAlias type="mall.domain.Color" 				alias="Color"/>
 		<typeAlias type="mall.domain.Size" 					alias="Size"/>
 		<typeAlias type="mall.domain.ProductColor" 		alias="ProductColor"/>
 		<typeAlias type="mall.domain.ProductSize" 		alias="ProductSize"/>
+		<typeAlias type="mall.domain.ProductImg" 		alias="ProductImg"/>
 		
 	</typeAliases>
 	
@@ -34,6 +35,7 @@
 		<mapper resource="mall/mybatis/SizeMapper.xml" />
 		<mapper resource="mall/mybatis/ProductColorMapper.xml" />
 		<mapper resource="mall/mybatis/ProductSizeMapper.xml" />
+		<mapper resource="mall/mybatis/ProductImgMapper.xml" />
 	</mappers>
 </configuration>
 
