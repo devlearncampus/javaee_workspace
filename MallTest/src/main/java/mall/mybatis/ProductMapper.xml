@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Product">
+	
+	<insert id="insert" parameterType="Product">
+		insert into product(product_name, brand, price, discount, introduce, detail, subcategory_id)
+		values(#{product_name}, #{brand}, #{price}, #{discount}, #{introduce}, #{detail}, #{subcategory.subcategory_id})
+		
+		<selectKey keyColumn="product_id" keyProperty="product_id" resultType="int" order="AFTER">
+			select last_insert_id() as product_id
+		</selectKey>
+	</insert>
+	
+	<!-- 조인  -->
+	<resultMap type="Product" id="joinMap">		
+		<id 		column="product_id" 			property="product_id"/>
+		<result 	column="product_name" 	property="product_name"/>
+		<result 	column="brand" 				property="brand"/>
+		<result 	column="price" 					property="price"/>
+		<result 	column="discount" 			property="discount"/>
+		<result 	column="introduce" 			property="introduce"/>
+		<result 	column="detail" 				property="detail"/>
+		<association column="subcategory_id" property="subcategory" javaType="SubCategory" select="SubCategory.select"/>			
 
+ 		<collection column="product_id" property="colorList" 	javaType="java.util.List" ofType="ProductColor" 	select="ProductColor.selectByProductId"/>
+		<collection column="product_id" property="sizeList" 	javaType="java.util.List" ofType="ProductSize" 	select="ProductSize.selectByProductId"/>
+		<collection column="product_id" property="imgList" 	javaType="java.util.List" ofType="ProductImg" 	select="ProductImg.selectByProductId"/>
+	</resultMap>	
+	
+	<sql id="columns">
+			product_id , product_name, brand, price, discount, introduce, detail, subcategory_id 
+	</sql>
+	
+	<select id="selectAll" resultMap="joinMap">
+		select <include refid="columns"/> from product  
+	</select>	
+	
+	<select id="select" parameterType="int" resultMap="joinMap">
+		select <include refid="columns"/> from product 
+		where product_id=#{product_id}
+	</select>
+	
+
+	<!-- 
+		외부 참조용 (ProductColor 에서의 접근용 )
+		순환 방지를 위해 Product만 가져옴 (resultMap 을 사용하지 않음 )  
+	-->
+	<select id="selectOnlyProduct" parameterType="int" resultType="Product">
+		select <include refid="columns"/> from product 
+		where product_id=#{product_id}
+	</select>
+	
+	
 </mapper>
 
 

@@ -5,9 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Dashboard</title>
-	
 	<%@ include file="../inc/head_link.jsp" %>
-
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -49,93 +47,81 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        
-        <!-- Main row -->
-        <div class="row">
-            <!-- general form 시작 -->
-            <div class="card card-primary w-100">
+      
+            <!-- 상품 등록 폼 시작 -->
+            <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+                <h3 class="card-title">상품 등록 폼</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              
+              <form id="form1">
                 <div class="card-body">
-
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <!-- Select multiple-->
-                      <div class="form-group">
-                        <label>상위 카테고리</label>
-                        <select class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                          <option>option 5</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label>하위 카테고리</label>
-                        <select  class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                          <option>option 5</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                
-                
-                
+                	<!-- 카테고리 영역 시작 -->
+	                  <div class="row">
+	                    <div class="col-sm-6">
+	                      <!-- Select multiple-->
+	                      <div class="form-group">
+	                        <label>상위 카테고리</label>
+	                        <select class="form-control" id="topcategory"></select>
+	                      </div>
+	                    </div>
+	                    <div class="col-sm-6">
+	                      <div class="form-group">
+	                        <label>하위 카테고리</label>
+	                        <select class="form-control" name="subcategory.subcategory_id" id="subcategory"></select>
+	                      </div>
+	                    </div>
+	                  </div>
+                	<!-- 카테고리 영역 끝 -->
                   <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="text" class="form-control" name="product_name" placeholder="상품명 입력">
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="text" class="form-control" name="brand" placeholder="브랜드 입력">
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="text" class="form-control" name="price" placeholder="가격 입력">
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="text" class="form-control" name="discount" placeholder="할인가 입력">
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="text" class="form-control" name="introduce" placeholder="간단소개 100자 이하 ">
                   </div>
+				   <div class="form-group">
+                       <select class="form-control" id="color"  name="color" multiple="multiple"></select>
+	              </div>
+				  
+				  <div class="form-group">
+                       <select class="form-control"  id="size" name="size" multiple="multiple"></select>
+	              </div>
+	              
                   <div class="form-group">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					<!-- 편집 시작 -->
+			      	<textarea id="summernote" name="detail"></textarea>
+					<!-- 편집기 끝-->
                   </div>
+                  
                   <div class="form-group">
                     <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">파일을 선택하세요</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
+                        <input type="file" name="photo" id="photo" multiple="multiple">
+		                <div class="form-group" id="preview" style="width:100%"></div>
                     </div>
                   </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
+                
+                	
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-secondary" id="bt_regist">Submit</button>
                 </div>
               </form>
             </div>
-            <!-- general form 끝 -->
-        </div>
-        <!-- /.row (main row) -->
+            <!-- 상품 등록 폼 끝-->
+        
       </div>
       <!-- /.container-fluid -->
     </section>
@@ -150,9 +136,127 @@
 </div>
 <!-- ./wrapper -->
 	<%@ include file="../inc/footer_link.jsp" %>
+	<script src="/static/admin/custom/ProductImg.js"></script>
+	<script src="/static/admin/custom/fileupload.js"></script>
 	<script>
-	  $.widget.bridge('uibutton', $.ui.button)
+	function printCategory(obj, list){
+		
+		let tag="<option value='0'>선택</option>";
+		
+		for(let i=0;i<list.length;i++){
+			if(obj=="#topcategory"){				
+				tag+="<option value='"+list[i].topcategory_id+"'>"+list[i].top_name+"</option>";
+			}else if(obj=="#subcategory"){
+				tag+="<option value='"+list[i].subcategory_id+"'>"+list[i].sub_name+"</option>";
+			}else if(obj=="#color"){
+				tag+="<option value='"+list[i].color_id+"'>"+list[i].color_name+"</option>";
+			}else if(obj=="#size"){
+				tag+="<option value='"+list[i].size_id+"'>"+list[i].size_name+"</option>";
+			}
+		}
+		
+		$(obj).html(tag);  // innerHTML=태그 동일
+	}
+	
+	//비동기 방식으로 서버에 요청을 시도하여, 데이터 가져오기 
+	function getTopCategory(){
+		$.ajax({
+			url:"/admin/admin/topcategory/list",
+			type:"get",
+			success:function(result, status, xhr){ //200번대의 성공 응답 시, 이 함수 실행
+				console.log("서버로부터 받은 결과는 ", result);
+				//화면에 출력하기 
+				printCategory("#topcategory",result);
+			},
+			error:function(xhr, status, err){
+			}
+		});
+	}
+	
+	function getSubCategory(topcategory_id){
+		$.ajax({
+			url :"/admin/admin/subcategory/list?topcategory_id="+topcategory_id,
+			type:"get",
+			success:function(result, status, xhr){
+				console.log(result);
+				printCategory("#subcategory",result);
+			}
+		});
+	}
+	
+	function getColorList(){
+		$.ajax({
+			url:"/admin/admin/color/list",
+			type:"get",
+			success:function(result, status, xhr){
+				printCategory("#color", result);
+			}
+		});
+	}
+	
+	function getSizeList(){
+		$.ajax({
+			url:"/admin/admin/size/list",
+			type:"get",
+			success:function(result, status, xhr){
+				printCategory("#size", result);
+			}
+		});
+	}
+
+
+	$(()=>{
+	   $('#summernote').summernote({
+		height:200,
+		placeholder:"상품 상세 설명을 채우세요"
+	   });
+	   getTopCategory(); //상위 카테고리 가져오기 
+	   getColorList(); //색상 목록 가져오기 
+	   getSizeList(); //사이즈 목록 가져오기 
+	   
+	   function regist(){
+			let formData = new FormData(document.getElementById("form1"));
+			
+			//기존 form 의 이미지 필드 정보 에서 선택된 이미지 필드 제거 
+			formData.delete("photo");
+			
+			for(let i=0;i<selectedFiles.length;i++){
+				formData.append("photo", selectedFiles[i]);
+			}
+			
+			$.ajax({
+				url:"/admin/admin/product/regist",
+				type:"post",
+				data:formData, 
+				processData:false, /*문자열로 변환되는 것을 방지 */
+				contentType:false,  /*브라우저가 자동으로 content-type 을 설정하도록 함 */
+				success:function(result, status, xhr){
+					console.log("성공");
+				},
+				error:function(xhr, status, err){
+					console.log(err);
+				}
+			});
+	   }
+	   
+	   //상위 카테고리의 값을 변경시, 하위 카테고리 가져오기 
+	   $("#topcategory").change(function(){
+			getSubCategory($(this).val());
+	   });
+	   
+	   //이미지 선택
+	   $("#photo").change(function(e){
+			addImg(e, selectedFiles, "#preview");
+	   });
+	   
+	   
+	   //등록버튼 이벤트 연결 
+	   $("#bt_regist").click(()=>{
+			regist();
+	   });
+	});
 	</script>
+	
 </body>
 </html>
 

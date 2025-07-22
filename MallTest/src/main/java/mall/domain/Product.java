@@ -1,5 +1,7 @@
 package mall.domain;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -13,11 +15,9 @@ public class Product {
 	private int discount;
 	private String introduce;
 	private String detail;
-	private MultipartFile photo;
+	private MultipartFile[] photo;	
+	private List<ProductColor> colorList;
+	private List<ProductSize> sizeList;
+	private List<ProductImg> imgList;
 	private SubCategory subcategory;
 }
-
-
-
-
-

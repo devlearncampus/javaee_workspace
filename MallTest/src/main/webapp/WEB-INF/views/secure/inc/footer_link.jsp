@@ -22,11 +22,13 @@
 <script src="/static/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- Summernote -->
 <script src="/static/admin/plugins/summernote/summernote-bs4.min.js"></script>
+
 <!-- overlayScrollbars -->
-<script src="/static/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- <script src="/static/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> -->
+
 <!-- AdminLTE App -->
 <script src="/static/admin/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/static/admin/dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/static/admin/dist/js/pages/dashboard.js"></script>
+
+
+
+

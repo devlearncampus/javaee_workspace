@@ -2,9 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SubCategory">
 	
-	<select id="selectByTopCategoryId" parameterType="int" resultType="SubCategory">
+	<resultMap type="SubCategory" id="topcategoryMap">
+		<id column="subcategory_id" property="subcategory_id"/>
+		<result column="sub_name" property="sub_name"/>
+		<association column="topcategory" property="topcategory" javaType="TopCategory" select="TopCategory.select"/>
+	</resultMap>
+	
+	<select id="selectByTopCategoryId" parameterType="int" resultMap="topcategoryMap">
 		select * from subcategory where topcategory_id=#{topcategory_id}
 	</select>
+	
+	<select id="select" parameterType="int" resultMap="topcategoryMap">
+		select * from subcategory where subcategory_id=#{subcategory_id}
+	</select>	
 	
 </mapper>
 

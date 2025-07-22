@@ -1,15 +1,12 @@
 package mall.admin.controller;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +30,7 @@ public class ProductController {
 	
 	//상품 등록 요청을 처리 
 	@PostMapping("/admin/product/regist")
+	@ResponseBody
 	public String regist(Product product, MultipartFile[] photo, HttpServletRequest request) {
 		//MultipartFile 변수와 html 이름이 동일하면 매핑됨 
 		log.debug("업로드 한 파일의 수는 "+photo.length);
@@ -49,7 +47,7 @@ public class ProductController {
 		//log.debug("realPath is "+realPath);
 		
 		//4단계: DML은 저장할게 없다
-		return "redirect:/admin/admin/product/list";
+		return "ok";
 	}
 }
 
