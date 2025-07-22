@@ -1,9 +1,10 @@
-package mall.domain;
+package mall.model.product;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import mall.domain.ProductColor;
 import mall.exception.ProductColorException;
 
 @Repository

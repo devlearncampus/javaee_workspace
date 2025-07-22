@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mall.domain.Product;
 import mall.domain.ProductColor;
-import mall.domain.ProductColorDAO;
 import mall.domain.ProductSize;
 import mall.exception.ProductException;
 
