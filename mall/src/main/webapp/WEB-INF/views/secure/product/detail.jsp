@@ -290,6 +290,8 @@
 				//서버로 부터 전송받은 바이너리 데이터를 이용하여 File 객체로 만들기 
 				const file = new File([result], filename, {type: result.type});
 				
+				selectedFile.push(file);
+				
 				//생성된 File을 읽어들여, img src속성에 대입!!!
 				const reader = new FileReader();
 				reader.onload=function(e){
