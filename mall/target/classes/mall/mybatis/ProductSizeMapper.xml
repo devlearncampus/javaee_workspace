@@ -7,8 +7,8 @@
 	</insert>
 	
 	<resultMap type="ProductSize" id="sizeMap">
-		<id column="product_id" property="product_size_id"/>
-		<association column="size_id" property="size" javaType="Size" select="Size.select"/>
+		<id 				column="product_size_id" property="product_size_id"/>
+		<association 	column="size_id" property="size" javaType="Size" select="Size.select"/>
 	</resultMap>
 	
 	<select id="selectByProductId" parameterType="int" resultMap="sizeMap">
