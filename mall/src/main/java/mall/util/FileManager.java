@@ -66,7 +66,29 @@ public class FileManager{
 		}
 		
 	}
+	
+	//상품 이미지 삭제 (지정한 상품의 디렉토리 및 그 안의 파일들..)
+	//savePath ~~~~ /data/p_pk값
+	public void remove(Product product, String savePath) {
+		
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

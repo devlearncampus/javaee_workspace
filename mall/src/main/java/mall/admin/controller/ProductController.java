@@ -1,19 +1,17 @@
 package mall.admin.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 import mall.domain.Color;
@@ -97,6 +95,19 @@ public class ProductController {
 		
 		//4단계: DML은 저장할게 없다
 		return "ok";
+	}
+	
+	//목록 요청 처리 : 요청이 들어오면 list.jsp 를 응답정보로 보내야 한다..따라서 
+	//ResponseBody 가 아닌 ModelAndView로 반환해야 함..
+	@GetMapping("/admin/product/list")
+	public ModelAndView getList() {
+		//3단계: 목록 가져오기 
+		
+		//4단계: 결과 저장
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("secure/product/list");
+		
+		return mav;
 	}
 }
 
