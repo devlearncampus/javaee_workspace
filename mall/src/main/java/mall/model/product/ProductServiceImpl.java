@@ -10,7 +10,11 @@ import mall.domain.Product;
 import mall.domain.ProductColor;
 import mall.domain.ProductImg;
 import mall.domain.ProductSize;
+import mall.exception.ProductColorException;
 import mall.exception.ProductException;
+import mall.exception.ProductImgException;
+import mall.exception.ProductSizeException;
+import mall.exception.UploadException;
 import mall.util.FileManager;
 
 @Service  //서비스는 모델 영역의 객체이기는 하나, 직접 일하지 않고 주로 전담 객체들에게 일을 할당
@@ -34,7 +38,7 @@ public class ProductServiceImpl implements ProductService{
 	//상품등록+색상등록+사이즈등록+이미지등록+파일저장
 	@Transactional  //아래의 DAO가 가진 DML 메서드 중 한 하나라도 Exception이 발생되면 
 							//스프링이 알아서 rollback
-	public void regist(Product product, String savePath) throws ProductException{
+	public void regist(Product product, String savePath) throws ProductException, ProductColorException, ProductSizeException, UploadException, ProductImgException{
 		//1) 상품 등록 후, product_id 취득, mybatis selectkey에  의해 자동으로 채워져있음
 		productDAO.insert(product);
 		
@@ -63,6 +67,10 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 	
+	@Override
+	public void remove(Product product, String savePath) {
+		fileManager.remove(product, savePath);
+	}
 }
 
 

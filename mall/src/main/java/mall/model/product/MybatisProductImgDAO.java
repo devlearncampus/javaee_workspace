@@ -17,11 +17,12 @@ public class MybatisProductImgDAO implements ProductImgDAO{
 	public void insert(ProductImg productImg) throws ProductImgException{
 		int result = sqlSessionTemplate.insert("ProductImg.insert",productImg);
 		
+		//result=0;
+		
 		if(result <1) {
 			throw new ProductImgException("상품 이미지 정보 등록 실패");
 		}
-	}
-	
+	}	
 }
 
 

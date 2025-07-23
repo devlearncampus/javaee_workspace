@@ -85,7 +85,12 @@ public class ProductController {
 		
 		String savePath = request.getServletContext().getRealPath("/data");
 		
-		productService.regist(product, savePath);
+		try {
+			productService.regist(product, savePath);
+		} catch (Exception e) {
+			productService.remove(product, savePath);
+			e.printStackTrace();
+		}
 		
 		//log.debug("product = "+product);
 		//log.debug("photo = "+photo);
