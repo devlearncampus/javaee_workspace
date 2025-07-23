@@ -8,13 +8,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MybatisSizeDAO implements SizeDAO{
-	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public List selectAll() {
+	public List seletAll() {
 		return sqlSessionTemplate.selectList("Size.selectAll");
 	}
-	
+
 }

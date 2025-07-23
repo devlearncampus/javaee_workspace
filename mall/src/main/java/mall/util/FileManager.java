@@ -20,6 +20,10 @@ import mall.exception.UploadException;
 @Slf4j
 public class FileManager{
 	public void save(Product product, String savePath) throws UploadException{
+		
+		//파일의 수가 복수개 이므로, 상품마다 1:1 대응하는 디렉토리를 생성하자 
+		File directory=new File(savePath, "p_"+product.getProduct_id());   //p_7  , p_23
+		
 		//MultipartFile 변수와 html 이름이 동일하면 매핑됨 
 		MultipartFile[] photo=product.getPhoto();
 		log.debug("업로드 한 파일의 수는 "+photo.length);
@@ -51,7 +55,7 @@ public class FileManager{
 				
 				//realPath를 사용하려면, 앱의 전반적인 전역적 정보를 가진 객체인 ServletContext가 필요함 
 				
-				File file = new File(savePath+File.separator+filename);
+				File file = new File(directory.getAbsolutePath() +File.separator+filename);
 				log.debug("업로드된 이미지가 생성된 경로는 "+savePath);
 				
 				photo[i].transferTo(file); //메모리상의 파일 정보가, 실제 디스크상으로 존재하게 되는 시점!!

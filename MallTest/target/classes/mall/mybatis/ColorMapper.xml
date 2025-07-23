@@ -6,9 +6,6 @@
 		select * from color
 	</select>
 	
-	<select id="select" parameterType="int" resultType="Color">
-		select * from color where color_id=#{color_id}
-	</select>	
 </mapper>
 
 

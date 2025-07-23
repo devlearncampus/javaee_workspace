@@ -16,10 +16,12 @@ public class SizeController {
 	
 	@GetMapping("/admin/size/list")
 	@ResponseBody
-	public List getList() {
-		List sizeList=sizeService.selectAll();
-		
-		return sizeList;
+	public List selectAll() {
+		return sizeService.selectAll();
 	}
-	
 }
+
+
+
+
+

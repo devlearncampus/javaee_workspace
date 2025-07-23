@@ -10,10 +10,7 @@ public class SizeServiceImpl implements SizeService{
 	@Autowired
 	private SizeDAO sizeDAO;
 	
-	@Override
 	public List selectAll() {
-		// TODO Auto-generated method stub
-		return sizeDAO.selectAll();
+		return sizeDAO.seletAll();
 	}
-	
 }

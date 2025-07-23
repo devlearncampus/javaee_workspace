@@ -169,6 +169,8 @@
       
       
       
+      
+      
       <Context docBase="mall" path="/" reloadable="true" source="org.eclipse.jst.jee.server:mall">
       	<ResourceLink global="jndi/mysql" name="jndi/mysql" type="javax.sql.DataSource"/>
       </Context>

@@ -13,12 +13,12 @@ public class MybatisProductColorDAO implements ProductColorDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	@Override
-	public void insert(ProductColor productColor) {
-		int result=sqlSessionTemplate.insert("ProductColor.insert", productColor);
+	public void insert(ProductColor productColor) throws ProductColorException{
+		
+		int result = sqlSessionTemplate.insert("ProductColor.insert",productColor);
 		
 		if(result <1) {
-			throw new ProductColorException("상품 색상 등록 실패");
+			throw new ProductColorException("상품의 지원 색상 등록 실패");
 		}
 	}
 	

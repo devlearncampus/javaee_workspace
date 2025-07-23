@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ProductColor">
-	
+
 	<insert id="insert" parameterType="ProductColor">
 		insert into product_color(product_id, color_id) values(#{product.product_id}, #{color.color_id})
-	</insert>	
-	
-	
-	<resultMap type="ProductColor" id="colorMap">
-		<id 				column="product_color_id" property="product_color_id"/>
-		<!-- <association 	column="product_id" 			property="product" 	javaType="Product" 	select="Product.selectOnlyProduct"/> -->
-		<association 	column="color_id"	 			property="color" 		javaType="Color" 		select="Color.select"/>
-	</resultMap>
-	
-	<select id="selectByProductId" resultMap="colorMap" parameterType="int">
-		select product_color_id, product_id, color_id 
-		from product_color where product_id=#{product_id}
-	</select>
-
- 
-<!--  
- 	<select id="selectByProductId" parameterType="int" resultType="Color">
- 		select color_id, color_name 
- 		from product_color p, color c 
- 		where  p.color_id=c.color_id
- 		and product_id=#{product_id} 		
- 	</select>	
- --> 	
+	</insert>
 </mapper>
 
 

@@ -7,4 +7,5 @@ public class ProductColor {
 	private int product_color_id;
 	private Product product;
 	private Color color;
+	
 }

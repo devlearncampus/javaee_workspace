@@ -19,71 +19,46 @@ import mall.exception.UploadException;
 @Component // ComponentScan의 대상이 될 수 있다. 따라서 자동으로 인스턴스 올라온다 
 @Slf4j
 public class FileManager{
-	
-	public void save(Product product , String savePath) throws UploadException{
-		
-		//디렉토리 생성 (상품의 pk값을 이용)
-		File directory = new File(savePath, "p_"+product.getProduct_id());
+	public void save(Product product, String savePath) throws UploadException{
+		//MultipartFile 변수와 html 이름이 동일하면 매핑됨 
 		MultipartFile[] photo=product.getPhoto();
+		log.debug("업로드 한 파일의 수는 "+photo.length);
 		
-		List productImgList = new ArrayList();
+		List imgList = new ArrayList();
 		
-		log.debug("업로드 할 이미지 수는 "+photo.length);
-		
-		for(int i=0;i<photo.length;i++) {
-			String filename=photo[i].getOriginalFilename();
-			
-			String ext= filename.substring(filename.lastIndexOf(".")+1, filename.length());
-			log.debug("확장자 "+ext);
-			
-			//파일명을  유일성을 보장하기 위한 방법은 상당히 많다 
-			//해시값, 현재날짜, db pk 값 
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-			long time = System.currentTimeMillis();
-			String newName= time+"."+ext;
-			File file = new File(directory.getAbsolutePath()+File.separator+newName);//저장될 파일 
-			
-			ProductImg productImg = new ProductImg();
-			productImg.setFilename(newName);
-			productImgList.add(productImg);
-			
-			try {
-				photo[i].transferTo(file);
-				log.debug(file.getAbsolutePath());//업로드된 결과 디렉토리 확인차 
+		try {
+			for(int i=0;i<photo.length;i++) {
+				//확장자 구하기 (원본 업로드 이미지 정보 추츨)
+				log.debug("원본 파일명은 "+photo[i].getOriginalFilename());
+				String  ori=photo[i].getOriginalFilename();
 				
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new UploadException("파일 저장 실패", e);
-			}		
-		}
-		product.setImgList(productImgList);
-	}
-	
-	//상품 디렉토리에 소속된 이미지 삭제  
-	public void remove(Product product, String savePath){
-		File directory = new File(savePath, "p_"+product.getProduct_id());
-		
-		if (directory.exists() && directory.isDirectory()) { //디렉토리 라
-		    File[] files = directory.listFiles();//파일 목록 얻기 
-		    
-		    if (files != null) { //파일이 존재한다면 
-		        for (File file : files) {
-		            boolean deleted = file.delete(); //파일 삭제 
-		            log.debug(file.getName() + " 삭제됨? " + deleted);
-		        }
-		    }
-		    
-		    boolean result = directory.delete();  // 이제 비어있으니 삭제됨		    
-		    //log.debug("디렉토리 삭제 결과: " + result);
-		    
-		    if(result==false) {
-		    	log.warn("파일 삭제 실패, 체크요망 "+ directory.getAbsolutePath());
-		    }
+				String ext =ori.substring(ori.lastIndexOf(".")+1, ori.length());
+				
+				//개발자가 원하는 파일명 생성하기 
+				try {
+					Thread.sleep(10); //연산 속도가 너무 빠르면, 파일명이 중복될 수 있으므로..일부러 지연.. 
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				long time=System.currentTimeMillis(); //23758297829
+				String filename=time+"."+ext;
+				
+				//생성한 파일명을 DB 저장하기 위해 Product 의 imgList 에 보관해놓자
+				ProductImg productImg = new ProductImg();
+				productImg.setFilename(filename);//이미지명 저장
+				imgList.add(productImg);
+				product.setImgList(imgList); //리스트 대입 
+				
+				//realPath를 사용하려면, 앱의 전반적인 전역적 정보를 가진 객체인 ServletContext가 필요함 
+				
+				File file = new File(savePath+File.separator+filename);
+				log.debug("업로드된 이미지가 생성된 경로는 "+savePath);
+				
+				photo[i].transferTo(file); //메모리상의 파일 정보가, 실제 디스크상으로 존재하게 되는 시점!!
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UploadException("파일 업로드 실패", e);
 		}
 		
 	}
