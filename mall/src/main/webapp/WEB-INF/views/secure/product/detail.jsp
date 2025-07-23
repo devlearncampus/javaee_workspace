@@ -1,3 +1,4 @@
+<%@page import="mall.domain.ProductImg"%>
 <%@page import="mall.domain.Product"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
@@ -82,16 +83,16 @@
                     <input type="text" class="form-control" name="product_name" value="<%=product.getProduct_name() %>">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="brand" placeholder="브랜드 입력">
+                    <input type="text" class="form-control" name="brand" value="<%=product.getBrand()%>">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="price" placeholder="가격 입력">
+                    <input type="text" class="form-control" name="price" value="<%=product.getPrice()%>">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="discount" placeholder="할인가 입력">
+                    <input type="text" class="form-control" name="discount" value="<%=product.getDiscount()%>">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control" name="introduce" placeholder="간단소개 100자 이하 ">
+                    <input type="text" class="form-control" name="introduce" value="<%=product.getIntroduce()%>">
                   </div>
 				   <div class="form-group">
                        <select class="form-control" name="color" id="color" multiple="multiple">
@@ -266,14 +267,57 @@
 		});
 	}
 	
+	//비동기 방식으로, 서버의 이미지를 다운로드 받기 
+	function getImgList(dir, filename){
+		console.log("넘겨받은 파일명은 ", dir, "/",filename);
+		$.ajax({
+			url:"/data/"+dir+"/"+filename, 
+			type:"GET",
+			//서버로부터 가져온 이미지 정보는 img src로 표현되려면, 
+			//1) 서버로 부터 가져온 정보를 Blob 형태로 가져와서
+			//2) 웹브라우저 지원 객체인 File 로 변환 
+			//3) 이 파일을 읽어들인 후 e.target.result 형태로 img src에 대입
+			//XMLHttpRequest 객체를 이용해야 함
+			xhr: function(){
+				const xhr = new XMLHttpRequest();
+				xhr.responseType="blob"; //blob 형태의 데이터 요청 
+				//blob 이란? Binary Large Object 의 준말로, 이미지, 비디오, 오디오, 일반 파일 등의 이진 데이터
+				//를 담을 수 있는 자바스크립트 객체
+				return xhr;
+			},
+			success:function(result, status, xhr){
+				console.log("서버로부터 받은 바이너리 정보는 ",result);
+				//서버로 부터 전송받은 바이너리 데이터를 이용하여 File 객체로 만들기 
+				const file = new File([result], filename, {type: result.type});
+				
+				//생성된 File을 읽어들여, img src속성에 대입!!!
+				const reader = new FileReader();
+				reader.onload=function(e){
+					console.log("읽어들인 정보 ", e);
+					
+					//container, file, src, width, height
+					let productImg = new ProductImg(document.getElementById("preview"),file, e.target.result, 100,100 );
+				}
+				reader.readAsDataURL(file);//대상 파일 읽기 
+			}
+			
+		});
+	}
+	
 	$(()=>{
 	   $('#summernote').summernote({
 		height:200,
-		placeholder:"상품 상세 설명을 채우세요"
+		code:"<%=product.getDetail()%>"
 	   });
+	   
 	   getTopCategory(); //상위 카테고리 가져오기 
 	   getColorList(); //색상 목록 가져오기 
 	   getSizeList(); //사이즈 목록 가져오기 
+	   
+	   //현재 우리가 가진 정보는,filename밖에 없으므로 실제 이미지를 onLoad 시점에 서버로 부터 다운로드 받자
+	   <%for( ProductImg productImg : product.getImgList()){%>
+	   	getImgList("p_<%=product.getProduct_id()%>"  ,"<%=productImg.getFilename()%>");
+	   <%}%>
 	   
 	   //상위 카테고리의 값을 변경시, 하위 카테고리 가져오기 
 	   $("#topcategory").change(function(){
