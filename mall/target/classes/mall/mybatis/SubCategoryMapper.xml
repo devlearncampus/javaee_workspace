@@ -6,6 +6,10 @@
 		select * from subcategory where topcategory_id=#{topcategory_id}
 	</select>
 	
+	<select id="select" resultType="SubCategory" parameterType="int">
+		select * from subcategory where subcategory_id=#{subcategory_id}
+	</select>
+	
 </mapper>
 
 

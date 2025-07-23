@@ -13,7 +13,39 @@
 		</selectKey>
 	</insert>
 
+	<sql id="columns">
+		product_id, product_name, brand, price,discount, introduce, detail, subcategory_id
+	</sql>
+		
+	<!-- Product 의 레코드를 수집하여 Product 모델 객체에 담아야 하지만, 
+		컬럼명 중 colorList, sizeList, imgList 와 일치하는 컬럼이 없으므로, 수동으로 직접 개발자가 나서서 
+		매핑을 걸어야 한다..이때 사용하는 기능이 resutlMap 이다
+	 -->	
+	<resultMap type="Product" id="joinMap">
+		<id 		column="product_id" 			property="product_id"/>
+		<result 	column="product_name" 	property="product_name"/>
+		<result 	column="brand" 				property="brand"/>
+		<result 	column="price" 					property="price"/>
+		<result 	column="discount" 			property="discount"/>
+		<result 	column="introduce" 			property="introduce"/>
+		<result 	column="detail" 				property="detail"/>
+		
+		<association column="subcategory_id" property="subcategory" javaType="SubCategory"
+				select="SubCategory.select"/>
+		
+	</resultMap>
+	
+	<select id="selectAll" resultMap="joinMap">
+		select <include refid="columns"/> from product
+	</select>
+	
 </mapper>
+
+
+
+
+
+
 
 
 

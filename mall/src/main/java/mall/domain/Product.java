@@ -27,7 +27,7 @@ public class Product {
 	
 	private MultipartFile[] photo;
 	
-	private SubCategory subcategory;
+	private SubCategory subcategory; //1:1 관계 (myatis 에서 association 으로 매핑)
 }
 
 
