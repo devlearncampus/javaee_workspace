@@ -22,16 +22,24 @@
 		매핑을 걸어야 한다..이때 사용하는 기능이 resutlMap 이다
 	 -->	
 	<resultMap type="Product" id="joinMap">
-		<id 		column="product_id" 			property="product_id"/>
+		<id 		column="product_id" 		property="product_id"/>
 		<result 	column="product_name" 	property="product_name"/>
 		<result 	column="brand" 				property="brand"/>
 		<result 	column="price" 					property="price"/>
 		<result 	column="discount" 			property="discount"/>
 		<result 	column="introduce" 			property="introduce"/>
 		<result 	column="detail" 				property="detail"/>
-		
+	
+		<!-- 1:1 관계인 부모를 연계한다 -->		
 		<association column="subcategory_id" property="subcategory" javaType="SubCategory"
 				select="SubCategory.select"/>
+		
+		<!-- 1:多 관계인 자식을 수집한다 -->
+		<collection column="product_id" property="colorList" javaType="java.util.List" ofType="ProductColor"
+			select="ProductColor.selectByProductId"/>
+		
+		<collection column="product_id" property="sizeList" javaType="java.util.List" ofType="ProductSize"
+			select="ProductSize.selectByProductId"/>
 		
 	</resultMap>
 	
@@ -39,7 +47,28 @@
 		select <include refid="columns"/> from product
 	</select>
 	
+	<select id="select" parameterType="int" resultMap="joinMap">
+		select <include refid="columns"/> from product 
+		where product_id=#{product_id}
+	</select>
+	
+	<!-- 루프의 흐름을 끊기 위해서는 더이상 기존 resultMap을 사용해서는 안된다..  
+		또 다른 resultMap을 사용하거나, 일일이 수동 가져와야함
+	<select id="selectOnlyProduct" resultType="Product">
+		select <include refid="columns"/> from product 
+		where product_id=#{product_id}	
+	</select>
+	-->
 </mapper>
+
+
+
+
+
+
+
+
+
 
 
 
