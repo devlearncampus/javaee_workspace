@@ -1,4 +1,13 @@
+<%@page import="mall.domain.Size"%>
+<%@page import="mall.domain.ProductSize"%>
+<%@page import="mall.domain.ProductColor"%>
+<%@page import="mall.domain.Color"%>
+<%@page import="mall.domain.Product"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%
+	List<Product> productList =(List)request.getAttribute("productList");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,42 +81,56 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Reason</th>
+                      <th>No</th>
+                      <th>이미지</th>
+                      <th>카테고리</th>
+                      <th>상품명</th>
+                      <th>브랜드</th>
+                      <th>가격</th>
+                      <th>할인가</th>
+                      <th>색상</th>
+                      <th>사이즈</th>
                     </tr>
                   </thead>
                   <tbody>
+                  	<%for(int i=0;i<productList.size();i++){ %>
+                  	<%Product product = productList.get(i); %>
                     <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <td>1</td>
+                      <td><img width="40px" src="/data/p_<%=product.getProduct_id() %>/<%=product.getImgList().get(0).getFilename()%>"></td>
+                      <td><%=product.getSubcategory().getSub_name() %></td>
+                      <td><%=product.getProduct_name() %></td>
+                      <td><%=product.getBrand() %></td>
+                      <td><%=product.getPrice() %></td>
+                      <td><%=product.getDiscount()%></td>
+                      <td>
+                      <% 
+                      	List<ProductColor> colorList=product.getColorList();
+                      	StringBuffer sb = new StringBuffer();
+                      	
+                      	for(ProductColor productColor : colorList){
+                      		Color color=productColor.getColor();
+                      		sb.append(color.getColor_name());
+                      		sb.append(",");
+                      	}
+                      	out.print(sb.toString());
+                      %>
+                      </td>
+                      <td>
+                      <%
+							List<ProductSize> sizeList = product.getSizeList();
+                      		sb.delete(0, sb.length()); //기존 스트링 지우기 
+                      		for(ProductSize productSize  : sizeList){
+                      			Size size=productSize.getSize();
+                      			sb.append(size.getSize_name());
+                      			sb.append(",");
+                      		}
+                      		out.print(sb.toString());
+						%>
+                      
+                      </td>
                     </tr>
-                    <tr>
-                      <td>219</td>
-                      <td>Alexander Pierce</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-warning">Pending</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>657</td>
-                      <td>Bob Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-primary">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
-                    <tr>
-                      <td>175</td>
-                      <td>Mike Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="tag tag-danger">Denied</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                    </tr>
+                    <%} %>
                   </tbody>
                 </table>
               </div>

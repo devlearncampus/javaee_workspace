@@ -107,9 +107,11 @@ public class ProductController {
 	@GetMapping("/admin/product/list")
 	public ModelAndView getList() {
 		//3단계: 목록 가져오기 
+		List productList=productService.selectAll();
 		
 		//4단계: 결과 저장
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("productList", productList); //request.setAttribute("productList",productList);
 		mav.setViewName("secure/product/list");
 		
 		return mav;

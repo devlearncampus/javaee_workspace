@@ -25,7 +25,7 @@
 		<id 		column="product_id" 		property="product_id"/>
 		<result 	column="product_name" 	property="product_name"/>
 		<result 	column="brand" 				property="brand"/>
-		<result 	column="price" 					property="price"/>
+		<result 	column="price" 				property="price"/>
 		<result 	column="discount" 			property="discount"/>
 		<result 	column="introduce" 			property="introduce"/>
 		<result 	column="detail" 				property="detail"/>
@@ -40,6 +40,9 @@
 		
 		<collection column="product_id" property="sizeList" javaType="java.util.List" ofType="ProductSize"
 			select="ProductSize.selectByProductId"/>
+		
+		<collection column="product_id" property="imgList" javaType="java.util.List" ofType="ProductImg"
+			select="ProductImg.selectByProductId"/>
 		
 	</resultMap>
 	

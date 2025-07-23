@@ -15,6 +15,7 @@
 		select product_size_id, product_id, size_id from product_size 
 		where product_id=#{product_id}	
 	</select>
+	
 </mapper>
 
 
