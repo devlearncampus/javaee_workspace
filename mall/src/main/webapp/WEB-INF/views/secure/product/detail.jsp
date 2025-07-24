@@ -1,8 +1,21 @@
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@page import="mall.domain.ProductImg"%>
 <%@page import="mall.domain.Product"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	Product product = (Product)request.getAttribute("product");
+
+
+	//Java 를 JSON 문자열로 변환
+	ObjectMapper mapper=new ObjectMapper(); //java -- json
+	
+	int[] colorArray=new int[product.getColorList().size()];
+	for(int i=0;i<colorArray.length;i++){
+		colorArray[i]=product.getColorList().get(i).getColor().getColor_id();
+	}
+	String colorJson = mapper.writeValueAsString(colorArray);
+	out.print("color json 는 "+colorJson);
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -194,18 +207,18 @@
 		});
 	}
 	
-	function getSubCategory(topcategory_id){
+	function getSubCategory(topcategory_id, v){
 		$.ajax({
 			url :"/admin/admin/subcategory/list?topcategory_id="+topcategory_id,
 			type:"get",
 			success:function(result, status, xhr){
 				console.log(result);
-				printCategory("#subcategory",result);
+				printCategory("#subcategory",result, v);
 			}
 		});
 	}
 	
-	function getColorList(){
+	function getColorList(v){
 		$.ajax({
 			url:"/admin/admin/color/list",
 			type:"get",
@@ -213,7 +226,7 @@
 				
 				console.log("색상은 ",result);
 				
-				printCategory("#color", result);
+				printCategory("#color", result, v);
 			}
 		});
 	}
@@ -316,7 +329,8 @@
 	   });
 	   
 	   getTopCategory(<%=product.getSubcategory().getTopcategory().getTopcategory_id() %>); //상위 카테고리 가져오기 
-	   getColorList(); //색상 목록 가져오기 
+	   getSubCategory(<%=product.getSubcategory().getTopcategory().getTopcategory_id() %>, <%=product.getSubcategory().getSubcategory_id()%>);
+	   getColorList(<%=colorJson%>); //색상 목록 가져오기 
 	   getSizeList(); //사이즈 목록 가져오기 
 	   
 	   //현재 우리가 가진 정보는,filename밖에 없으므로 실제 이미지를 onLoad 시점에 서버로 부터 다운로드 받자
