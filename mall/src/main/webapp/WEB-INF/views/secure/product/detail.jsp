@@ -158,7 +158,7 @@
 	<%@ include file="../inc/footer_link.jsp" %>
 	<script src="/static/admin/custom/ProductImg.js"></script>
 	<script>
-	function printCategory(obj, list){
+	function printCategory(obj, list, v){
 		let tag="<option value='0'>카테고리 선택</option>";
 		
 		for(let i=0;i<list.length;i++){
@@ -174,17 +174,20 @@
 		}
 		
 		$(obj).html(tag);  // innerHTML=태그 동일
+		
+		//현재 select 객체의 값 설정
+		$(obj).val(v);
 	}
 	
 	//비동기 방식으로 서버에 요청을 시도하여, 데이터 가져오기 
-	function getTopCategory(){
+	function getTopCategory(v){
 		$.ajax({
 			url:"/admin/admin/topcategory/list",
 			type:"get",
 			success:function(result, status, xhr){ //200번대의 성공 응답 시, 이 함수 실행
 				console.log("서버로부터 받은 결과는 ", result);
 				//화면에 출력하기 
-				printCategory("#topcategory",result);
+				printCategory("#topcategory",result, v);
 			},
 			error:function(xhr, status, err){
 			}
@@ -312,7 +315,7 @@
 		code:"<%=product.getDetail()%>"
 	   });
 	   
-	   getTopCategory(); //상위 카테고리 가져오기 
+	   getTopCategory(<%=product.getSubcategory().getTopcategory().getTopcategory_id() %>); //상위 카테고리 가져오기 
 	   getColorList(); //색상 목록 가져오기 
 	   getSizeList(); //사이즈 목록 가져오기 
 	   
