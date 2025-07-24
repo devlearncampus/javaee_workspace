@@ -85,7 +85,7 @@
                                     <input type="text" value="1">
                                 </div>
                             </div>
-                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                            <a href="javascript:addCart()" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
                             <ul>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
@@ -302,6 +302,38 @@
 
 	<!-- Js Plugins -->
 	<%@ include file="./inc/footer_link.jsp" %>
+	<script type="text/javascript">
+		//비동기 요청으로 장바구니 담기 
+		function addCart(){
+			//let formData = new FormData();//개발자가 명시하지 않아도 multipart/form-data 가 이미 적용 
+															//파일 업로드가 아니더라도 사용 가능 	'
+			$.ajax({
+				url:"/shop/cart/regist", 
+				type:"post", 
+				data:{
+					"product.product_id" : <%=product.getProduct_id()%>
+				},
+				success:function(result, status, xhr){
+					console.log(result);
+				}
+			});
+		}
+	
+	</script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
