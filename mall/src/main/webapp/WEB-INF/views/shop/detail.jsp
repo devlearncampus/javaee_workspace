@@ -1,3 +1,6 @@
+<%@page import="mall.domain.ProductColor"%>
+<%@page import="mall.domain.ProductSize"%>
+<%@page import="mall.domain.ProductImg"%>
 <%@page import="mall.domain.Product"%>
 <%@page import="mall.domain.SubCategory"%>
 <%@page import="mall.domain.TopCategory"%>
@@ -5,6 +8,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	List<TopCategory> topList=(List)request.getAttribute("topList");
+	Product product =(Product)request.getAttribute("product");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,32 +44,30 @@
                 <div class="col-lg-6">
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
+                           	
+                           	<%for(int i=0;i<product.getImgList().size();i++){ %>
+                           	<%ProductImg productImg = product.getImgList().get(i); %>
                             <a class="pt active" href="#product-1">
-                                <img src="img/product/details/thumb-1.jpg" alt="">
+                                <img src="/data/p_<%=product.getProduct_id()%>/<%=productImg.getFilename() %>" alt="">
                             </a>
-                            <a class="pt" href="#product-2">
-                                <img src="img/product/details/thumb-2.jpg" alt="">
-                            </a>
-                            <a class="pt" href="#product-3">
-                                <img src="img/product/details/thumb-3.jpg" alt="">
-                            </a>
-                            <a class="pt" href="#product-4">
-                                <img src="img/product/details/thumb-4.jpg" alt="">
-                            </a>
+                           <%} %>
+                           
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="img/product/details/product-1.jpg" alt="">
-                                <img data-hash="product-2" class="product__big__img" src="img/product/details/product-3.jpg" alt="">
-                                <img data-hash="product-3" class="product__big__img" src="img/product/details/product-2.jpg" alt="">
-                                <img data-hash="product-4" class="product__big__img" src="img/product/details/product-4.jpg" alt="">
+	                           	<%for(int i=0;i<product.getImgList().size();i++){ %>
+	                           	<%ProductImg productImg = product.getImgList().get(i); %>
+                                <img data-hash="product-1" class="product__big__img" src="/data/p_<%=product.getProduct_id()%>/<%=productImg.getFilename() %>" alt="">
+                                <%} %>
+                                
+                                
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        <h3>Essential structured blazer <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
+                        <h3><%=product.getProduct_name() %><span>Brand: <%=product.getBrand() %></span></h3>
                         <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -74,9 +76,8 @@
                             <i class="fa fa-star"></i>
                             <span>( 138 reviews )</span>
                         </div>
-                        <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div>
-                        <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
-                        magni lores eos qui ratione voluptatem sequi nesciunt.</p>
+                        <div class="product__details__price"><%=product.getDiscount() %> <span><%=product.getPrice() %></span></div>
+                        <p><%=product.getIntroduce() %></p>
                         <div class="product__details__button">
                             <div class="quantity">
                                 <span>Quantity:</span>
@@ -104,40 +105,28 @@
                                 </li>
                                 <li>
                                     <span>Available color:</span>
+                                    
                                     <div class="color__checkbox">
-                                        <label for="red">
-                                            <input type="radio" name="color__radio" id="red" checked>
-                                            <span class="checkmark"></span>
+                                    	<%for( ProductColor pc : product.getColorList()){ %>
+                                    	<%
+                                    		String color=pc.getColor().getColor_name();
+                                    	%>
+                                        <label for="<%=color.toLowerCase()%>">
+                                            <input type="radio" name="color__radio" id="<%=color.toLowerCase()%>" checked>
+                                            <span class="checkmark <%=color.toLowerCase()%>-bg"></span>
                                         </label>
-                                        <label for="black">
-                                            <input type="radio" name="color__radio" id="black">
-                                            <span class="checkmark black-bg"></span>
-                                        </label>
-                                        <label for="grey">
-                                            <input type="radio" name="color__radio" id="grey">
-                                            <span class="checkmark grey-bg"></span>
-                                        </label>
+            							<%} %>
                                     </div>
                                 </li>
                                 <li>
                                     <span>Available size:</span>
                                     <div class="size__btn">
+                                    	<%for(ProductSize ps  : product.getSizeList()){ %>
                                         <label for="xs-btn" class="active">
                                             <input type="radio" id="xs-btn">
-                                            xs
+                                            <%=ps.getSize().getSize_name() %>
                                         </label>
-                                        <label for="s-btn">
-                                            <input type="radio" id="s-btn">
-                                            s
-                                        </label>
-                                        <label for="m-btn">
-                                            <input type="radio" id="m-btn">
-                                            m
-                                        </label>
-                                        <label for="l-btn">
-                                            <input type="radio" id="l-btn">
-                                            l
-                                        </label>
+                                        <%}%>
                                     </div>
                                 </li>
                                 <li>
@@ -164,16 +153,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <h6>Description</h6>
-                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                quis, sem.</p>
+                                <p><%=product.getDetail() %></p>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <h6>Specification</h6>

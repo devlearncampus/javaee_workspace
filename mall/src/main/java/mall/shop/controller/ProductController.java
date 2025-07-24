@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import mall.domain.Product;
 import mall.model.category.TopCategoryService;
 import mall.model.product.ProductService;
 
@@ -45,7 +46,11 @@ public class ProductController {
 		
 		//3단계: 최상위 카테고리 가져오기, 모든 상품 가져오기 
 		List topList=topCategoryService.selectAll();
+		Product product=productService.select(product_id);
+		
 		mav.addObject("topList", topList);
+		mav.addObject("product", product);
+		
 		return mav;
 	}
 	
