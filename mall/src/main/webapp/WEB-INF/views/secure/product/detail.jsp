@@ -16,6 +16,12 @@
 	String colorJson = mapper.writeValueAsString(colorArray);
 	out.print("color json 는 "+colorJson);
 	
+	int[] sizeArray = new int[product.getSizeList().size()];
+	for(int i=0;i<sizeArray.length;i++){
+		sizeArray[i] = product.getSizeList().get(i).getSize().getSize_id();
+	}
+	String sizeJson = mapper.writeValueAsString(sizeArray);
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -231,12 +237,12 @@
 		});
 	}
 	
-	function getSizeList(){
+	function getSizeList(v){
 		$.ajax({
 			url:"/admin/admin/size/list",
 			type:"get",
 			success:function(result, status, xhr){
-				printCategory("#size", result);
+				printCategory("#size", result,v);
 			}
 		});
 	}
@@ -324,14 +330,14 @@
 	
 	$(()=>{
 	   $('#summernote').summernote({
-		height:200,
-		code:"<%=product.getDetail()%>"
+		height:200
 	   });
+	   $("#summernote").summernote("code", "<%=product.getDetail()%>");
 	   
 	   getTopCategory(<%=product.getSubcategory().getTopcategory().getTopcategory_id() %>); //상위 카테고리 가져오기 
 	   getSubCategory(<%=product.getSubcategory().getTopcategory().getTopcategory_id() %>, <%=product.getSubcategory().getSubcategory_id()%>);
 	   getColorList(<%=colorJson%>); //색상 목록 가져오기 
-	   getSizeList(); //사이즈 목록 가져오기 
+	   getSizeList(<%=sizeJson%>); //사이즈 목록 가져오기 
 	   
 	   //현재 우리가 가진 정보는,filename밖에 없으므로 실제 이미지를 onLoad 시점에 서버로 부터 다운로드 받자
 	   <%for( ProductImg productImg : product.getImgList()){%>

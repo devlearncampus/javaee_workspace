@@ -27,7 +27,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"mall.shop.controller"})
+@ComponentScan(basePackages = {"mall.shop.controller, mall.util"})
 //@Controller, @Service, @Repository, @Component
 public class UserWebConfig {
 	/*하위 컨트롤러가 3,4단계를 수행한 후, DispatcherServlet 에게 정확한 파일명을 알려주는게 아니라
