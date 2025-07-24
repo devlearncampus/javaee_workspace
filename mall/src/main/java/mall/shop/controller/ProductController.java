@@ -38,6 +38,17 @@ public class ProductController {
 		return mav;
 	}
 	
+	//상세요청 처리 
+	@GetMapping("/product/detail")
+	public ModelAndView getDetail(int product_id) {
+		ModelAndView mav = new ModelAndView("shop/detail");
+		
+		//3단계: 최상위 카테고리 가져오기, 모든 상품 가져오기 
+		List topList=topCategoryService.selectAll();
+		mav.addObject("topList", topList);
+		return mav;
+	}
+	
 }
 
 
