@@ -82,7 +82,7 @@
                             <div class="quantity">
                                 <span>Quantity:</span>
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="text" id="ea" value="1">
                                 </div>
                             </div>
                             <a href="javascript:addCart()" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
@@ -112,7 +112,7 @@
                                     		String color=pc.getColor().getColor_name();
                                     	%>
                                         <label for="<%=color.toLowerCase()%>">
-                                            <input type="radio" name="color__radio" id="<%=color.toLowerCase()%>" checked>
+                                            <input type="radio" name="color" id="<%=color.toLowerCase()%>" value="<%=pc.getColor().getColor_id()%>">
                                             <span class="checkmark <%=color.toLowerCase()%>-bg"></span>
                                         </label>
             							<%} %>
@@ -311,7 +311,10 @@
 				url:"/shop/cart/regist", 
 				type:"post", 
 				data:{
-					"product.product_id" : <%=product.getProduct_id()%>
+					"product.product_id" : <%=product.getProduct_id()%>,
+					"ea" : $("#ea").val(),
+					"member_id":2,
+					
 				},
 				success:function(result, status, xhr){
 					console.log(result);
